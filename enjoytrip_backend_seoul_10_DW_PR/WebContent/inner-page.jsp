@@ -1,74 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-
-    <title>Bon Voyage</title>
-    <meta content="" name="description" />
-    <meta content="" name="keywords" />
-
-    <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon" />
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
-
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-      rel="stylesheet"
-    />
-
-    <!-- Vendor CSS Files -->
-    <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
-    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
-
-    <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet" />
+    <%@ include file="/include/head.jsp" %>
     <link href="assets/css/login.css" rel="stylesheet" />
-
-    <!-- =======================================================
-  * Template Name: Squadfree
-  * Updated: Mar 10 2023 with Bootstrap v5.2.3
-  * Template URL: https://bootstrapmade.com/squadfree-free-bootstrap-template-creative/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
   </head>
 
   <body>
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top header-transparent">
-      <div class="container d-flex align-items-center justify-content-between position-relative">
-        <div class="logo">
-          <h1 class="text-light">
-            <a href="index.html"
-              ><span><img src="assets/img/logo.png" alt="" /></span
-            ></a>
-          </h1>
-          <!-- Uncomment below if you prefer to use an image logo -->
-          <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-        </div>
-
-        <nav id="navbar" class="navbar">
-          <ul>
-            <li><a class="nav-link scrollto active" href="index.html#hero">Home</a></li>
-            <li><a class="nav-link scrollto" href="index.html#about">About Us</a></li>
-            <li><a class="nav-link scrollto" href="index.html#services">Search</a></li>
-            <li><a class="nav-link scrollto" href="index.html#portfolio">Recommend</a></li>
-            <li><a class="nav-link scrollto" href="community-list.html">Community</a></li>
-            <li><a class="nav-link scrollto" href="index.html#contact">Plan</a></li>
-            <li><a class="nav-link scrollto" href="inner-page.html">Login</a></li>
-          </ul>
-          <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav>
-        <!-- .navbar -->
-      </div>
+      <%@ include file="/include/nav.jsp" %>
     </header>
     <!-- End Header -->
 
@@ -78,38 +19,43 @@
         <div class="center" id="login">
           <div class="container">
             <div class="text"><img src="assets/img/black_logo.png" alt="" /></div>
-            <div class="form-container" id="logininit">
-              <div class="data">
-                <label id="email">이메일</label>
-                <input type="text" id="LoginId" required />
-              </div>
-              <div class="data">
-                <label>비밀번호</label>
-                <input
-                  type="password"
-                  id="LoginPwd"
-                  onKeypress="javascript:if(event.keyCode==13) {Login()}"
-                  required
-                />
-              </div>
-              <div class="btn">
-                <div class="inner"></div>
-                <button type="submit" id="LoginBtn" onclick="Login()">로그인</button>
-              </div>
-              <!-- <div class="forgot-pass">
+            <form method="POST" action="${root}/user">
+              <input type="hidden" name="action" value="login" />
+              <div class="form-container" id="logininit">
+                <div class="data">
+                  <label id="email">아이디</label>
+                  <input type="text" id="LoginId" name="id" required />
+                </div>
+                <div class="data">
+                  <label>비밀번호</label>	
+                  <input
+                    type="password"
+                    id="LoginPwd"
+                    name="pw"
+                    onKeypress="javascript:if(event.keyCode==13) {Login()}"
+                    required
+                  />
+                </div>
+                <div class="btn">
+                  <div class="inner"></div>
+                  <button type="submit" id="LoginBtn" onclick="Login()">로그인</button>
+                </div>
+                <!-- <div class="forgot-pass">
               <a href="/findPassword">비밀번호를 잊으셨나요?</a>
               </div> -->
-              <div class="signup-link">
-                회원이 아니세요? <a href="#" onclick="Signin()">회원가입하기</a>
+                <div class="signup-link">
+                  회원이 아니세요? <a href="#" onclick="Signin()">회원가입하기</a>
+                </div>
               </div>
-            </div>
+            </form>
             <form
               name="join_form"
-              action="join_ok.php"
+              action="${root}/user"
               method="post"
               id="signIn"
               style="display: none"
             >
+              <input type="hidden" name="action" value="login" />
               <div>
                 <label>아이디<input type="text" name="uid" id="uid" /></label>
                 <!-- <button type="button" onclick="id_check();">중복확인</button> -->
@@ -213,35 +159,11 @@
     </section>
     <!-- End Hero -->
 
-    <main id="main">
-      <!-- ======= Cta Section ======= -->
-      <section id="cta" class="cta">
-        <div class="container" data-aos="zoom-in">
-          <div class="text-center">
-            <h3>Call To Action</h3>
-            <p>
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-              officia deserunt mollit anim id est laborum.
-            </p>
-            <a class="cta-btn" href="#">Call To Action</a>
-          </div>
-        </div>
-      </section>
-      <!-- End Cta Section -->
-    </main>
+    <!-- <main id="main"></main> -->
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <footer id="footer">
-      <div class="container">
-        <div class="copyright">
-          &copy; Copyright <strong><span>Bon Voyage</span></strong
-          >. All Rights Reserved
-        </div>
-        <div class="credits"></div>
-      </div>
-    </footer>
+    <footer id="footer"><%@ include file="/include/footer.jsp" %></footer>
     <!-- End Footer -->
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"
@@ -263,4 +185,3 @@
     <script src="assets/js/detail-Info.js"></script>
   </body>
 </html>
-    
