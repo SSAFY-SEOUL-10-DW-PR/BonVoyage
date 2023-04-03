@@ -141,6 +141,13 @@ public class AttractionDto {
 	public void setMlevel(String mlevel) {
 		this.mlevel = mlevel;
 	}
+	public String getRouteElement() {
+		StringBuilder sb= new StringBuilder();
+		sb.append("(").append(content_id).append(",").append(content_type_id).append(",").append(title).append(",").append(longitude).append(",").append(latitude).append(")");
+		
+		return sb.toString();
+	}
 
+	
 
 }

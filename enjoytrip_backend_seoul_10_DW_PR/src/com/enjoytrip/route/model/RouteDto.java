@@ -6,19 +6,19 @@ import com.enjoytrip.attraction.model.AttractionDto;
 
 public class RouteDto {
 	private int routeId;
-	private int userId;
-	private List<AttractionDto> route_info;
+	private String userId;
+	private List<AttractionDto> routeInfo;
 	
 	public RouteDto() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public RouteDto(int routeId, int userId, List<AttractionDto> route_info) {
+	public RouteDto(int routeId, String userId, List<AttractionDto> routeInfo) {
 		super();
 		this.routeId = routeId;
 		this.userId = userId;
-		this.route_info = route_info;
+		this.routeInfo = routeInfo;
 	}
 
 	public int getrouteId() {
@@ -29,20 +29,28 @@ public class RouteDto {
 		this.routeId = routeId;
 	}
 
-	public int getuserId() {
+	public String getuserId() {
 		return userId;
 	}
 
-	public void setuserId(int userId) {
+	public void setuserId(String userId) {
 		this.userId = userId;
 	}
 
-	public List<AttractionDto> getRoute_info() {
-		return route_info;
+	public List<AttractionDto> getRouteInfo() {
+		return routeInfo;
 	}
 
-	public void setRoute_info(List<AttractionDto> route_info) {
-		this.route_info = route_info;
+	public void setRoute_info(List<AttractionDto> routeInfo) {
+		this.routeInfo = routeInfo;
+	}
+	
+	public String getRouteInfoToString() {
+		StringBuilder sb= new StringBuilder();
+		for (AttractionDto attractionDto : routeInfo) {
+			sb.append(attractionDto.getRouteElement());
+		}
+		return sb.toString();
 	}
 	
 	

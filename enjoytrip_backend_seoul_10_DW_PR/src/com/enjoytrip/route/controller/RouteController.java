@@ -1,4 +1,4 @@
-package com.enjoytrip.attraction.controller;
+package com.enjoytrip.route.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AttractionController
+ * Servlet implementation class RouteController
  */
-@WebServlet("/AttractionController")
-public class AttractionController extends HttpServlet {
+@WebServlet("/RouteController")
+public class RouteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AttractionController() {
+    public RouteController() {
         super();
         // TODO Auto-generated constructor stub
     }
