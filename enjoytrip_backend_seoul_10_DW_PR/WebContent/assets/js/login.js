@@ -12,7 +12,7 @@ function Logout() {
 function Login() {
   if (localStorage.getItem("userInfo") == null) {
     alert("아이디 또는 비밀번호가 올바르지 않습니다.");
-    return false
+    return false;
   }
 
   var user = JSON.parse(localStorage.getItem("userInfo"));
@@ -24,7 +24,7 @@ function Login() {
     pw == document.getElementById("LoginPwd").value
   ) {
     localStorage.setItem("isLogIn", true);
-    window.location.replace("index.html");
+    window.location.replace("index.jsp");
   } else {
     alert("아이디 또는 비밀번호가 올바르지 않습니다.");
   }
@@ -117,15 +117,22 @@ function joinform_check() {
 
   //입력 값 전송
   let userInfo = {
-    userID: uid.value,
-    userPWD: pwd.value,
+    user_id: uid.value,
+    user_pwd: pwd.value,
+    email: email_id.value + "@" + document.getElementById("email_add").value,
+    name: uname.value,
+    birth:
+      document.getElementById("yy").value +
+      "." +
+      document.getElementById("mm").value +
+      "." +
+      document.getElementById("dd").value,
+    phoneNum: mobile.value,
   };
-  console.log(userInfo.userID);
-  console.log(userInfo.userPWD);
   localStorage.setItem("userInfo", JSON.stringify(userInfo));
 
-  window.location.href = "http://127.0.0.1:5500/BonVoyage/index.html";
-  // document.join_form.submit(); //유효성 검사의 포인트
+  // window.location.replace("index.jsp");
+  document.join_form.submit(); //유효성 검사의 포인트
 }
 
 //아이디 중복체크 팝업창(현재 공백문서)

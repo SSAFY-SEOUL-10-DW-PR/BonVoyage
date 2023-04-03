@@ -89,5 +89,5 @@ function descList(data) {
   });
 
   localStorage.setItem("desc", desc);
-  window.location.href = "./portfolio-details.html";
+  window.location.href = "./portfolio-details.jsp";
 }
