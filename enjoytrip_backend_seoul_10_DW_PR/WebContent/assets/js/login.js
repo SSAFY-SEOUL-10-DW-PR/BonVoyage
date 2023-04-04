@@ -5,9 +5,9 @@ if (isLogIn) {
   document.getElementById("Login").style.display = "none";
 }
 
-function Logout() {
-  localStorage.removeItem("isLogIn");
-}
+//function Logout() {
+//  localStorage.removeItem("isLogIn");
+//}
 
 // function Login() {
 //   if (localStorage.getItem("userInfo") == null) {
@@ -129,7 +129,7 @@ function joinform_check() {
       document.getElementById("dd").value,
     phone: mobile.value,
   };
-  localStorage.setItem("userInfo", JSON.stringify(userInfo));
+//  localStorage.setItem("userInfo", JSON.stringify(userInfo));
 
   // window.location.replace("index.jsp");
   document.join_form.submit(); //유효성 검사의 포인트

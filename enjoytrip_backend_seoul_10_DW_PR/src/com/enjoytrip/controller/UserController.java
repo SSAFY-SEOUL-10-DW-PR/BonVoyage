@@ -35,10 +35,19 @@ public class UserController extends HttpServlet {
 		} else if ("login".equals(action)) {
 			path = login(request, response);
 			forward(request, response, path);
+		} else if ("logout".equals(action)) {
+			path = logout(request, response);
+			forward(request, response, path);
 		} else if ("join".equals(action)) {
 			path = join(request, response);
 			forward(request, response, path);
 		}
+	}
+
+	private String logout(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		session.removeAttribute("userInfo");
+		return "";
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

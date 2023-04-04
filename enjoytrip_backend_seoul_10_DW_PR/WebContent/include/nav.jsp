@@ -79,7 +79,7 @@
             <li>
               <a
                 class="nav-link scrollto"
-                href="${root}/user?action=mvlogin"
+                href="${root}/user?action=logout"
                 id="Logout"
                 style="display: none"
                 onclick="Logout()"
@@ -94,3 +94,13 @@
         </nav>
         <!-- .navbar -->
       </div>
+      
+      
+      
+<script>
+	<c:if test="${!empty userInfo}">
+	  document.getElementById("Logout").style.display = "block";
+	  document.getElementById("Mypage").style.display = "block";
+	  document.getElementById("Login").style.display = "none";
+	</c:if>
+</script>
