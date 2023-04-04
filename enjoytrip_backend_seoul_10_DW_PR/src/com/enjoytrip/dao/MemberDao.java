@@ -6,6 +6,7 @@ import com.enjoytrip.model.MemberDto;
 
 public interface MemberDao {
 
-	MemberDto login(String id, String pw) throws SQLException;
+	MemberDto login(String user_id, String user_pwd) throws SQLException;
+	void join(MemberDto memberDto) throws SQLException;
 	
 }

@@ -27,7 +27,7 @@
                   <input type="text" id="LoginId" name="id" required />
                 </div>
                 <div class="data">
-                  <label>비밀번호</label>	
+                  <label>비밀번호</label>
                   <input
                     type="password"
                     id="LoginPwd"
@@ -38,7 +38,7 @@
                 </div>
                 <div class="btn">
                   <div class="inner"></div>
-                  <button type="submit" id="LoginBtn" onclick="Login()">로그인</button>
+                  <button type="submit" id="LoginBtn">로그인</button>
                 </div>
                 <!-- <div class="forgot-pass">
               <a href="/findPassword">비밀번호를 잊으셨나요?</a>
@@ -55,7 +55,7 @@
               id="signIn"
               style="display: none"
             >
-              <input type="hidden" name="action" value="login" />
+              <input type="hidden" name="action" value="join" />
               <div>
                 <label>아이디<input type="text" name="uid" id="uid" /></label>
                 <!-- <button type="button" onclick="id_check();">중복확인</button> -->

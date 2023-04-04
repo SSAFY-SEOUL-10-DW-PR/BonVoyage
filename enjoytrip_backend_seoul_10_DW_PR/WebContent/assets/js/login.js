@@ -9,29 +9,29 @@ function Logout() {
   localStorage.removeItem("isLogIn");
 }
 
-function Login() {
-  if (localStorage.getItem("userInfo") == null) {
-    alert("아이디 또는 비밀번호가 올바르지 않습니다.");
-    return false;
-  }
+// function Login() {
+//   if (localStorage.getItem("userInfo") == null) {
+//     alert("아이디 또는 비밀번호가 올바르지 않습니다.");
+//     return false;
+//   }
 
-  var user = JSON.parse(localStorage.getItem("userInfo"));
-  var id = user.userID;
-  var pw = user.userPWD;
+//   var user = JSON.parse(localStorage.getItem("userInfo"));
+//   var id = user.userID;
+//   var pw = user.userPWD;
 
-  if (
-    id == document.getElementById("LoginId").value &&
-    pw == document.getElementById("LoginPwd").value
-  ) {
-    localStorage.setItem("isLogIn", true);
-    window.location.replace("index.jsp");
-  } else {
-    alert("아이디 또는 비밀번호가 올바르지 않습니다.");
-  }
+//   if (
+//     id == document.getElementById("LoginId").value &&
+//     pw == document.getElementById("LoginPwd").value
+//   ) {
+//     localStorage.setItem("isLogIn", true);
+//     window.location.replace("index.jsp");
+//   } else {
+//     alert("아이디 또는 비밀번호가 올바르지 않습니다.");
+//   }
 
-  // document.getElementById("Logout").style.display = "block";
-  document.getElementById("login-view").innerHTML = "logout";
-}
+//   // document.getElementById("Logout").style.display = "block";
+//   document.getElementById("login-view").innerHTML = "logout";
+// }
 
 function Signin() {
   // const area = document.getElementById("login");
@@ -127,7 +127,7 @@ function joinform_check() {
       document.getElementById("mm").value +
       "." +
       document.getElementById("dd").value,
-    phoneNum: mobile.value,
+    phone: mobile.value,
   };
   localStorage.setItem("userInfo", JSON.stringify(userInfo));
 
