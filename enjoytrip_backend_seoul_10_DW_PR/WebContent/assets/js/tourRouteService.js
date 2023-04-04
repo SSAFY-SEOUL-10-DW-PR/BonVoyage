@@ -102,7 +102,7 @@ function makeRoute() {
   let routeList = ``;
   let routeNo = 1;
     routes.forEach((route) => {
-      routeList += `<li name="routeElement"; id="${route.mapx},${route.mapy}">${routeNo}. ${route.title}</li>
+      routeList += `<li name="routeElement"; id="${route.mapx},${route.mapy}";>${routeNo}. ${route.title}<input type="hidden" name="routeElement" value="${route.contentId},${route.contentTypeId},${route.title},${route.mapx},${route.mapy}"></li>
       `;
       routeNo++;
     });

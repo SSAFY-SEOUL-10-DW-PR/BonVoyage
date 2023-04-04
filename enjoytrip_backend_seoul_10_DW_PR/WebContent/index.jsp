@@ -204,14 +204,17 @@
             <p>저장한 여행지들을 한눈에 확인할 수 있습니다.</p>
           </div>
 
+          <form method="post" id="routeForm" action="${root}/route">
           <div class="row">
             <div class="col-lg-9" style="height: 600px" id="map-route"></div>
             <div class="col-lg-3">
+            <input type="hidden" name="action" value="save">
               <ul id="sortlist"></ul>
             </div>
-            <button id="routeView">경로보기</button>
-            <button id="routeSave">경로저장</button>
+            <button type="button" class="btn btn-outline-dark" id="routeView">경로보기</button>
+            <button type="submit" class="btn btn-outline-success" id="routeSave">경로저장</button>
           </div>
+         </form>
         </div>
         <script></script>
       </section>

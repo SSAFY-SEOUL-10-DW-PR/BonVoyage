@@ -29,7 +29,7 @@ function setDestination(select) {
  * Easy event listener function
  */
 function recommendList(data) {
-  // console.log(data);
+   console.log("aaaaa");
   var trips = data.response.body.items.item;
   // var recommendlist = `<div class="row portfolio-container" data-aos="fade-up">`;
   var recommendlist = "";
@@ -68,7 +68,7 @@ function recommendList(data) {
             data-gallery="portfolioGallery"
             class="portfolio-lightbox"
             title="${area.title}"
-            id = "${area.title},${area.mapx},${area.mapy}"
+            id = "${area.title},${area.mapx},${area.mapy},${area.contentid},${area.contenttypeid}"
             onclick="addSchedule(this)"
             ><i class="bx bx-plus"></i
           ></a>
@@ -131,9 +131,11 @@ function recommendList(data) {
 function addSchedule(select) {
   var str = select.id.split(",");
   let loc = {
-    title: str[0],
-    mapx: str[1],
-    mapy: str[2],
+		    title: str[0],
+		    mapx: str[1],
+		    mapy: str[2],
+		    contentId: str[3],
+		    contentTypeId: str[4],
   };
 
   routes.push(loc);
