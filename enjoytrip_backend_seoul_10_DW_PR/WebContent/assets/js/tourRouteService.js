@@ -88,7 +88,7 @@ function isBefore(el1, el2) {
     return false;
 }
 
-document.getElementById("gogo").addEventListener("click", function () {
+document.getElementById("routeView").addEventListener("click", function () {
   makeRoute();
 });
 
