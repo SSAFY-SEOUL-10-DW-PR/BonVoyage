@@ -23,12 +23,13 @@
               <p>공지사항을 빠르고 정확하게 안내해드립니다.</p>
             </div>
             <div class="board_write_wrap">
+          <form id="form-modify" method="POST" action="">
               <div class="board_write">
                 <div class="title">
                   <dl>
                     <dt>제목</dt>
                     <dd>
-                      <input type="text" placeholder="제목 입력" value="" />
+                      <input type="text" placeholder="제목 입력" id="subject" value="" />
                     </dd>
                   </dl>
                 </div>
@@ -43,13 +44,14 @@
                   </dl>
                 </div>
                 <div class="cont">
-                  <textarea placeholder="내용 입력"></textarea>
+                  <textarea placeholder="내용 입력" id="content" name="content"></textarea>
                 </div>
               </div>
               <div class="bt_wrap">
-                <a href="community-view.jsp" class="on">수정</a>
-                <a href="community-view.jsp">취소</a>
+                <a href="#" class="on" id="btn-modify">수정</a>
+                <a href="#" id="btn-view">취소</a>
               </div>
+          </form>
             </div>
           </div>
         </main>
@@ -57,6 +59,25 @@
       </div>
     </section>
 
+    <script>
+      document.querySelector("#btn-modify").addEventListener("click", function () {
+        if (!document.querySelector("#subject").value) {
+          alert("제목 입력!!");
+          return;
+        } else if (!document.querySelector("#content").value) {
+          alert("내용 입력!!");
+          return;
+        } else {
+          let form = document.querySelector("#form-modify");
+          form.setAttribute("action", "${root}/modify");
+          form.submit();
+        }
+      });
+      document.querySelector("#btn-view").addEventListener("click", function () {
+        location.href = "${root}/board?action=view&articleno=${article.articleNo}";
+      });
+    </script>
+    
     <!-- ======= Footer ======= -->
     <footer id="footer">
 	<%@ include file="/include/footer.jsp" %>

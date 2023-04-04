@@ -68,7 +68,7 @@ function recommendList(data) {
             data-gallery="portfolioGallery"
             class="portfolio-lightbox"
             title="${area.title}"
-            id = "${area.title},${area.mapx},${area.mapy}"
+            id = "${area.title},${area.mapx},${area.mapy},${area.contentid},${area.contenttypeid}"
             onclick="addSchedule(this)"
             ><i class="bx bx-plus"></i
           ></a>
@@ -122,11 +122,9 @@ function recommendList(data) {
         });
       },
       true
-    );
+    );	
   }
 }
-
-
 
 function addSchedule(select) {
   var str = select.id.split(",");
@@ -134,6 +132,8 @@ function addSchedule(select) {
     title: str[0],
     mapx: str[1],
     mapy: str[2],
+    contentId: str[3],
+    contentTypeId: str[4],
   };
 
   routes.push(loc);
