@@ -9,10 +9,16 @@ import java.sql.SQLException;
 public class DBUtil {
 	
 	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+<<<<<<< HEAD
 	private static final String URL = "jdbc:mysql://localhost:3306/enjoytrip?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8";
 
 	private static final String DB_ID = "ssafy";
 	private static final String DB_PWD = "ssafy";
+=======
+	private static final String URL = "jdbc:mysql://localhost:3306/bonvoyage?serverTimezone=UTC&useUniCode=yes&characterEncoding=UTF-8";
+	private static final String DB_ID = "seoul10dwpr";
+	private static final String DB_PWD = "seoulseoul10";
+>>>>>>> DBconnection
 	
 	private static DBUtil instance = new DBUtil();
 

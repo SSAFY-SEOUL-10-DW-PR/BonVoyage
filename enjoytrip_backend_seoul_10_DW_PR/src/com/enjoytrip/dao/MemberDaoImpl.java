@@ -30,16 +30,18 @@ public class MemberDaoImpl implements MemberDao {
 		try {
 			conn = dBUtil.getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append("select user_id \n");
+			sql.append("select user_id, authorization \n");
 			sql.append("from user \n");
 			sql.append("where user_id = ? and user_pwd = ? \n");
 			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setString(1, id);
 			pstmt.setString(2, pw);
 			rs = pstmt.executeQuery();
+			System.out.println(rs.toString());
 			if(rs.next()) {
 				memberDto = new MemberDto();
 				memberDto.setId(rs.getString("user_id"));
+				memberDto.setAuthorization(rs.getString("authorization"));
 			}
 		} finally {
 			dBUtil.close(rs, pstmt, conn);
