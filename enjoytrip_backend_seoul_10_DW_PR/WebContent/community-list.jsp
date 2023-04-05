@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="javax.servlet.http.HttpSession, com.enjoytrip.model.MemberDto"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +14,11 @@
 	<%@ include file="/include/nav.jsp" %>
     </header>
     <!-- End Header -->
+
+<%
+MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+String userID = memberDto.getId();
+%>
 
     <section id="bg">
       <div class="hero-container" data-aos="fade-up">
@@ -85,11 +90,14 @@
                 <a href="#" class="bt next">></a>
                 <a href="#" class="bt last">>></a>
                  --%>
-              </div> 
+              </div>
+              <c:set var="userID" value = "<%=userID %>"/>
+              <c:if test="${userID eq 'admin'}">
               <div class="bt_wrap">
                 <a href="${root}/board?action=mvwrite" class="on">등록</a>
                 <!-- <a href="#">수정</a> -->
               </div>
+              </c:if>
             </div>
           </div>
         </main>
@@ -142,6 +150,7 @@
         document.querySelector("#form-param").submit();
       });
     });
+
     </script>
 
     <!-- Vendor JS Files -->

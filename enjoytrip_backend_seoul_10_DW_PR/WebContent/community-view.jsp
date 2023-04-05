@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="javax.servlet.http.HttpSession, com.enjoytrip.model.MemberDto"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="assets/css/community.css" />
   </head>
 
+<%
+MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+String userID = memberDto.getId();
+%>
   <body>
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top header-transparent">
@@ -56,7 +60,10 @@
               </div>
               <div class="bt_wrap">
                 <a href="${root}/board?action=list" class="on">목록</a>
+              <c:set var="userID" value = "<%=userID %>"/>
+              <c:if test="${userID eq 'admin'}">
                 <a href="${root}/board?action=mvmodify&articleno=${article.articleNo}">수정</a>
+              </c:if>
               </div>
             </div>
           </div>
