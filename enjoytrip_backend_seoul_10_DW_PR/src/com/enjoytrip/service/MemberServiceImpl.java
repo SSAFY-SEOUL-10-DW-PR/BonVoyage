@@ -18,8 +18,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberDto login(String id, String pw) throws Exception {
-		return memberDao.login(id, pw);
+	public MemberDto login(String user_id, String user_pwd) throws Exception {
+		return memberDao.login(user_id, user_pwd);
+	}
+
+	@Override
+	public void join(MemberDto memberDto) throws Exception {
+		memberDao.join(memberDto);
 	}
 
 }

@@ -19,7 +19,7 @@
             <li><a class="nav-link scrollto" href="index.jsp#about">About Us</a></li>
             <li><a class="nav-link scrollto" href="index.jsp#services">Search</a></li>
             <li><a class="nav-link scrollto" href="index.jsp#portfolio">Recommend</a></li>
-            <li><a class="nav-link scrollto" href="community-list.jsp">Community</a></li>
+            <li><a class="nav-link scrollto" href="${root}/board?action=list">Community</a></li>
             <!-- <li class="dropdown">
               <a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
               <ul>
@@ -79,7 +79,7 @@
             <li>
               <a
                 class="nav-link scrollto"
-                href="${root}/user?action=mvlogin"
+                href="${root}/user?action=logout"
                 id="Logout"
                 style="display: none"
                 onclick="Logout()"
@@ -94,3 +94,13 @@
         </nav>
         <!-- .navbar -->
       </div>
+      
+      
+      
+<script>
+	<c:if test="${!empty userinfo}">
+	  document.getElementById("Logout").style.display = "block";
+	  document.getElementById("Mypage").style.display = "block";
+	  document.getElementById("Login").style.display = "none";
+	</c:if>
+</script>

@@ -46,5 +46,27 @@ public class MemberDaoImpl implements MemberDao {
 		}
 		return memberDto;
 	}
+	
+	@Override
+	public void join(MemberDto memberDto) throws SQLException {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = dBUtil.getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("insert into user (user_id, user_pwd, email, name, birth, phone) \n");
+			sql.append("values (?, ?, ?, ?, ?, ?)");
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setString(1, memberDto.getId());
+			pstmt.setString(2, memberDto.getPw());
+			pstmt.setString(3, memberDto.getEmail());
+			pstmt.setString(4, memberDto.getName());
+			pstmt.setString(5, memberDto.getBirth());
+			pstmt.setString(6, memberDto.getPhone());
+			pstmt.executeUpdate();
+		} finally {
+			dBUtil.close(pstmt, conn);
+		}
+	}
 
 }

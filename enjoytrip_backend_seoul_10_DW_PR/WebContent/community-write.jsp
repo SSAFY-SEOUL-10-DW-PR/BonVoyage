@@ -23,11 +23,12 @@
               <p>공지사항을 빠르고 정확하게 안내해드립니다.</p>
             </div>
             <div class="board_write_wrap">
+          <form id="form-register" method="POST" action="">
               <div class="board_write">
                 <div class="title">
                   <dl>
                     <dt>제목</dt>
-                    <dd><input type="text" placeholder="제목 입력" /></dd>
+                    <dd><input type="text" id="subject" name="subject" placeholder="제목 입력" /></dd>
                   </dl>
                 </div>
                 <div class="info">
@@ -41,19 +42,35 @@
                   </dl>
                 </div>
                 <div class="cont">
-                  <textarea placeholder="내용 입력"></textarea>
+                  <textarea placeholder="내용 입력" id="content" name="content"></textarea>
                 </div>
               </div>
               <div class="bt_wrap">
-                <a href="community-view.jsp" class="on">등록</a>
-                <a href="community-list.jsp">취소</a>
+                <a href="#" class="on" id="btn-register">등록</a>
+                <a href="${root}/board?action=list">취소</a>
               </div>
+          </form>
             </div>
           </div>
         </main>
         <!-- End #main -->
       </div>
     </section>
+    <script>
+      document.querySelector("#btn-register").addEventListener("click", function () {
+        if (!document.querySelector("#subject").value) {
+          alert("제목 입력!!");
+          return;
+        } else if (!document.querySelector("#content").value) {
+          alert("내용 입력!!");
+          return;
+        } else {
+          let form = document.querySelector("#form-register");
+          form.setAttribute("action", "${root}/board?action=write");
+          form.submit();
+        }
+      });
+    </script>
 
     <!-- ======= Footer ======= -->
     <footer id="footer">

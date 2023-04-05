@@ -122,11 +122,9 @@ function recommendList(data) {
         });
       },
       true
-    );
+    );	
   }
 }
-
-
 
 function addSchedule(select) {
 
@@ -137,6 +135,7 @@ function addSchedule(select) {
 		    mapy: str[4],
 		    contentId: str[0],
 		    contentTypeId: str[1],
+
   };
 
   routes.push(loc);

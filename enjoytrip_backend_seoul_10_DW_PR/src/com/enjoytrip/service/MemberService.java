@@ -4,6 +4,7 @@ import com.enjoytrip.model.MemberDto;
 
 public interface MemberService {
 
-	MemberDto login(String id, String pw) throws Exception;
+	MemberDto login(String user_id, String user_pwd) throws Exception;
+	void join(MemberDto memberDto) throws Exception;
 	
 }
