@@ -254,14 +254,15 @@
     <script src="assets/js/login.js"></script>
     <!-- extra function -->
     <script>
-        if(<%=request.getAttribute("hasDBElement") %>!=null){
+    console.log("${hasDBElement}");
+        if("<%=request.getAttribute("hasDBElement")%>"!=null){
         	refreshRoute();
             <c:forEach var="attr" items="${routes}"> 
-            let hiddenInput = document.createElement("a");
+            var hiddenInput = document.createElement("a");
             hiddenInput.setAttribute("id", "${attr.contentId},${attr.contentTypeId},${attr.title},${attr.longitude},${attr.latitude}");
             addSchedule(hiddenInput);
 			</c:forEach>   
-            request.removeAttribute("hasDBElement");
+            <%request.removeAttribute("hasDBElement");%>
             makeRoute();
         }
         </script>

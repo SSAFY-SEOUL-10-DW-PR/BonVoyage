@@ -80,7 +80,7 @@ public class RouteDaoImpl implements RouteDao {
 		try {
 			conn=dbUtil.getConnection();
 			StringBuilder sql= new StringBuilder();
-			sql.append("select user_id, route_info from route where route_id=?");
+			sql.append("select route_id, user_id, route_info from route where route_id=?");
 			pstmt=conn.prepareStatement(sql.toString());
 			pstmt.setInt(1, routeId);
 			rs=pstmt.executeQuery();
@@ -88,7 +88,7 @@ public class RouteDaoImpl implements RouteDao {
 				routeDto=new RouteDto(); 
 				routeDto.setRouteId(rs.getInt("route_id"));
 				routeDto.setUserId(rs.getString("user_id"));
-				String[]routes=rs.getString("route_info").split("(|)");
+				String[]routes=rs.getString("route_info").split("/");
 				List<AttractionDto> routeInfoList=new ArrayList<>();
 				for(int i=0;i<routes.length;i++) {
 					String[] routeElement=routes[i].split(",");
@@ -109,11 +109,11 @@ public class RouteDaoImpl implements RouteDao {
 		Connection conn= null;
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List<RouteDto> routeList=null;
+		List<RouteDto> routeList= new ArrayList<RouteDto>();
 		try {
 			conn=dbUtil.getConnection();
 			StringBuilder sql= new StringBuilder();
-			sql.append("select user_id, route_info from route where user_id=?");
+			sql.append("select route_id, user_id, route_info from route where user_id=?");
 			pstmt=conn.prepareStatement(sql.toString());
 			pstmt.setString(1, userId);
 			rs=pstmt.executeQuery();
@@ -121,10 +121,12 @@ public class RouteDaoImpl implements RouteDao {
 				RouteDto routeDto=new RouteDto(); 
 				routeDto.setRouteId(rs.getInt("route_id"));
 				routeDto.setUserId(rs.getString("user_id"));
-				String[]routes=rs.getString("route_info").split("(|)");
+				String[]routes=rs.getString("route_info").split("/");
 				List<AttractionDto> routeInfoList=new ArrayList<>();
-				for(int i=0;i<routes.length;i++) {
+				for(int i=0;i<routes.length-1;i++) {
 					String[] routeElement=routes[i].split(",");
+					System.out.println(i);
+					System.out.println(routeElement[0]+" "+routeElement[1]+" "+routeElement[2]+" "+routeElement[3]+" "+routeElement[4]);
 					routeInfoList.add(new AttractionDto(Integer.parseInt(routeElement[0]),Integer.parseInt(routeElement[1]),routeElement[2],Double.parseDouble(routeElement[3]),Double.parseDouble(routeElement[4])));
 				}
 				routeDto.setRouteInfo(routeInfoList);
@@ -167,7 +169,7 @@ public class RouteDaoImpl implements RouteDao {
 		try {
 			conn=dbUtil.getConnection();
 			StringBuilder sql= new StringBuilder();
-			sql.append("delete from route where user_id=?");
+			sql.append("delete from route where route_id=?");
 			pstmt=conn.prepareStatement(sql.toString());
 			pstmt.setInt(1, routeId);
 			cnt=pstmt.executeUpdate();

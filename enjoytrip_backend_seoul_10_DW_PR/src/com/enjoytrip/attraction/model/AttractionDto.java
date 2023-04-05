@@ -153,7 +153,7 @@ public class AttractionDto {
 	}
 	public String getRouteElement() {
 		StringBuilder sb= new StringBuilder();
-		sb.append("(").append(contentId).append(",").append(contentTypeId).append(",").append(title).append(",").append(longitude).append(",").append(latitude).append(")");
+		sb.append(contentId).append(",").append(contentTypeId).append(",").append(title).append(",").append(longitude).append(",").append(latitude).append("/");
 		
 		return sb.toString();
 	}
