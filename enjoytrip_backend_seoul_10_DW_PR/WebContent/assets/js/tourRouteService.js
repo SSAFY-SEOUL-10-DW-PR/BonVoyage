@@ -102,7 +102,7 @@ function makeRoute() {
   let routeList = ``;
   let routeNo = 1;
     routes.forEach((route) => {
-      routeList += `<li name="routeElement"; id="${route.mapx},${route.mapy}";>${routeNo}. ${route.title} <button type="button" class="btm_image" id="img_btn"><img  src="assets/img/delete-button.png"></button><input type="hidden" name="routeElement" value="${route.contentId},${route.contentTypeId},${route.title},${route.mapx},${route.mapy}"></li>
+      routeList += `<li name="routeElement"; id="${route.mapx},${route.mapy}";>${routeNo}. ${route.title} <button type="button" class="btn_img" id="img_btn"><img  src="assets/img/close.png"></button><input type="hidden" name="routeElements" value="${route.contentId},${route.contentTypeId},${route.title},${route.mapx},${route.mapy}"></li>
       `;
       routeNo++;
     });
@@ -125,9 +125,24 @@ function viewRoute() {
 }
   routeList.forEach((routeLoc) => {
     var routeLocXY = routeLoc.id.split(",");
-    routeLoc.innerHTML =routeNo+". "+routeLoc.innerText.slice(3);
-    console.log(routeLoc.innerHTML);
-    console.log(routeLocXY[1], routeLocXY[0]);
+    let routeHidden = document.getElementById(routeLoc.id).childNodes;
+//    console.log(routeHidden);
+//    console.log(routeHidden.item(1));
+//    console.log(typeof(routeHidden.item(1)));
+//    console.log(routeHidden[2]);
+    let btn = document.createElement("img");
+    btn.setAttribute("src", "assets/img/close.png");
+    btn.setAttribute("class", "btn_img");
+    let hiddenInput = document.createElement("input");
+    hiddenInput.setAttribute("type", "hidden");
+    hiddenInput.setAttribute("name", "routeElements");
+    hiddenInput.setAttribute("value", routeHidden[2].value);
+    
+    routeLoc.innerHTML = routeNo + ". " + routeLoc.innerText.slice(3);
+    routeLoc.appendChild(btn);
+    routeLoc.appendChild(hiddenInput);
+//  routeLoc.append(routeHidden.item(1));
+//  routeLoc.append(routeHidden[2]);
     var imageSrc = `assets/img/marker/route/${routeNo}.png`; // 마커이미지의 크기입니다
     var markerImage = new kakao.maps.MarkerImage(imageSrc, new kakao.maps.Size(42, 50), { offset: new kakao.maps.Point(20, 45) });
     markerPosition = new kakao.maps.LatLng(Number(routeLocXY[1]), Number(routeLocXY[0]));
