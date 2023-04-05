@@ -9,7 +9,7 @@
 
 <%
 MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-String userID = memberDto.getId();
+String authority = memberDto.getAuthorization();
 %>
   <body>
     <!-- ======= Header ======= -->
@@ -60,8 +60,8 @@ String userID = memberDto.getId();
               </div>
               <div class="bt_wrap">
                 <a href="${root}/board?action=list" class="on">목록</a>
-              <c:set var="userID" value = "<%=userID %>"/>
-              <c:if test="${userID eq 'admin'}">
+              <c:set var="authority" value = "<%=authority %>"/>
+              <c:if test="${authority eq 'admin'}">
                 <a href="${root}/board?action=mvmodify&articleno=${article.articleNo}">수정</a>
               </c:if>
               </div>

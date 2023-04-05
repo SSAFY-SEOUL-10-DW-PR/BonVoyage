@@ -17,7 +17,7 @@
 
 <%
 MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-String userID = memberDto.getId();
+String authority = memberDto.getAuthorization();
 %>
 
     <section id="bg">
@@ -91,8 +91,8 @@ String userID = memberDto.getId();
                 <a href="#" class="bt last">>></a>
                  --%>
               </div>
-              <c:set var="userID" value = "<%=userID %>"/>
-              <c:if test="${userID eq 'admin'}">
+              <c:set var="authority" value = "<%=authority %>"/>
+              <c:if test="${authority eq 'admin'}">
               <div class="bt_wrap">
                 <a href="${root}/board?action=mvwrite" class="on">등록</a>
                 <!-- <a href="#">수정</a> -->
