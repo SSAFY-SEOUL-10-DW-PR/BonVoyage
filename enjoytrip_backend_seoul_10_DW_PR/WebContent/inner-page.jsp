@@ -22,11 +22,15 @@
             <form method="POST" action="${root}/user">
               <input type="hidden" name="action" value="login" />
               <div class="form-container" id="logininit">
-                <div class="data">
+                <div class="data" id="id">
                   <label id="email">아이디</label>
                   <input type="text" id="LoginId" name="id" required />
                 </div>
-                <div class="data">
+                  <div id="findmail" style="display : none">
+                  <label>이메일</label>
+                  <input type="text" id="findemail" name="findemail" required />
+                  </div>
+                <div class="data" id="LoginPassword">
                   <label>비밀번호</label>
                   <input
                     type="password"
@@ -39,9 +43,31 @@
                 <div class="btn">
                   <div class="inner"></div>
                   <button type="submit" id="LoginBtn">로그인</button>
+                  <button type="button" onclick="sendCode()" id="sendAuthenticCode" style = "display : none">인증번호 전송</button>
+                  <button type="button" onclick="putCode()" id="putAuthenticCode" style = "display : none">인증번호 입력</button>
                 </div>
                 <div class="forgot-pass">
-              <a href="${root}/user?action=findPassword">비밀번호를 잊으셨나요?</a>
+                <%--${root}/user?action=findPassword --%>
+              <a href="#" onclick="ForgotPassword()" id="passwordquery">비밀번호를 잊으셨나요?</a>
+              <script>
+              function ForgotPassword(){
+            	  document.querySelector("#LoginPassword").style.display ="none";
+            	  document.querySelector("#id").style.display ="none";
+            	  document.querySelector("#findmail").style.display ="block";
+            	  document.querySelector("#passwordquery").style.display ="none";
+            	  document.querySelector("#LoginBtn").style.display ="none";
+            	  document.querySelector("#sendAuthenticCode").style.display ="block";
+              }
+              
+              function sendCode(){
+            	  document.querySelector("#sendAuthenticCode").style.display ="none";
+            	  document.querySelector("#putAuthenticCode").style.display ="block";
+              }
+
+              function putCode(){
+        	  	location.href= "${root}/user?action=findPassword ";
+              }
+              </script>
               </div>
                 <div class="signup-link">
                   회원이 아니세요? <a href="#" onclick="Signin()">회원가입하기</a>
