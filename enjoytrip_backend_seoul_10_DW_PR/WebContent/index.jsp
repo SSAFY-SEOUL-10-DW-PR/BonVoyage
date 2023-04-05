@@ -215,11 +215,10 @@
             <button type="button" class="btn btn-outline-secondary" id="routeView" style="margin:15px 10px 15px 0px; width:100%">경로보기</button>
             <button type="submit" class="btn btn-outline-success" id="routeSave" style="margin:15px 0px 15px 10px; width:100%">경로저장</button> 
             </div>
-            <button type="button" class="btn btn-outline-info" id="routeLatestView" >최근 저장한 경로 불러오기</button>
+            <button type="button" class="btn btn-outline-info" id="routeLatestView" onclick="location.href='${root}/route?action=load&type=latest'">최근 저장한 경로 불러오기</button>
           </div>
          </form>
         </div>
-        <script></script>
       </section>
       <!-- End Contact Section -->
     </main>
@@ -253,5 +252,19 @@
     <script src="assets/js/tourRouteService.js"></script>
     <script src="assets/js/detail-Info.js"></script>
     <script src="assets/js/login.js"></script>
+    <!-- extra function -->
+    <script>
+        if(<%=request.getAttribute("hasDBElement") %>!=null){
+        	refreshRoute();
+            <c:forEach var="attr" items="${routes}"> 
+            let hiddenInput = document.createElement("a");
+            hiddenInput.setAttribute("id", "${attr.contentId},${attr.contentTypeId},${attr.title},${attr.longitude},${attr.latitude}");
+            addSchedule(hiddenInput);
+			</c:forEach>   
+            request.removeAttribute("hasDBElement");
+            makeRoute();
+        }
+        </script>
+    
   </body>
 </html>

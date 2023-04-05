@@ -61,7 +61,8 @@ public class RouteController extends HttpServlet {
 				if ("latest".equals(type)) {
 					List<RouteDto> routes = routeService.getRouteByUser(userId);
 					RouteDto latestroute = routes.get(routes.size() - 1);
-					request.setAttribute("route", latestroute);
+					request.setAttribute("routes", latestroute.getRouteInfo());
+					request.setAttribute("hasDBElement", "has");
 					return "/index.jsp";
 				} else if ("all".equals(type)) {
 					List<RouteDto> routes = routeService.getRouteByUser(userId);
