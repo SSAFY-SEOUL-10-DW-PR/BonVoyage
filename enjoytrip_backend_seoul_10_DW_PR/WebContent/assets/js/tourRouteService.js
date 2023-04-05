@@ -32,7 +32,7 @@ function slist(target) {
     i.ondragend = () => { for (let it of items) {
       it.classList.remove("hint");
       it.classList.remove("active");
-      viewRoute()
+      viewRoute();
     }};
 
     // (B6) DRAG OVER - PREVENT THE DEFAULT "DROP", SO WE CAN DO OUR OWN
@@ -114,6 +114,8 @@ function makeRoute() {
 
 var polyline;
 function viewRoute() {
+  refreshRoute();
+console.log(localStorage.getItem("routeJson"));
   var routeList = document.getElementsByName("routeElement");
   console.log(routeList);
   let routeNo = 1;
@@ -123,6 +125,7 @@ function viewRoute() {
   if (polyline != undefined||polyline!=null) { 
   polyline.setMap(null);
 }
+  console.log(routeList.length)
   routeList.forEach((routeLoc) => {
     var routeLocXY = routeLoc.id.split(",");
     let routeHidden = document.getElementById(routeLoc.id).childNodes;
@@ -133,10 +136,14 @@ function viewRoute() {
     let btn = document.createElement("img");
     btn.setAttribute("src", "assets/img/close.png");
     btn.setAttribute("class", "btn_img");
+    btn.setAttribute("onclick", "deleteRouteElement(this)");
     let hiddenInput = document.createElement("input");
     hiddenInput.setAttribute("type", "hidden");
     hiddenInput.setAttribute("name", "routeElements");
+    hiddenInput.setAttribute("id", routeHidden[2].value);
     hiddenInput.setAttribute("value", routeHidden[2].value);
+    console.log(hiddenInput);
+    addSchedule(hiddenInput);
     
     routeLoc.innerHTML = routeNo + ". " + routeLoc.innerText.slice(3);
     routeLoc.appendChild(btn);
@@ -168,7 +175,16 @@ function viewRoute() {
   mapRoute.setBounds(routeBounds);
 }
 
+function deleteRouteElement(select){
+	let deleteLi=select.parentElement;
+	deleteLi.parentElement.removeChild(deleteLi);
+	viewRoute();
+}
 
+function refreshRoute(){
+	localStorage.removeItem("routeJson");
+	routes.length=0;
+}
 
 
 

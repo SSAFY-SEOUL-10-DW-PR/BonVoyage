@@ -68,7 +68,7 @@ function recommendList(data) {
             data-gallery="portfolioGallery"
             class="portfolio-lightbox"
             title="${area.title}"
-            id = "${area.title},${area.mapx},${area.mapy},${area.contentid},${area.contenttypeid}"
+            id = "${area.contentid},${area.contenttypeid},${area.title},${area.mapx},${area.mapy}"
             onclick="addSchedule(this)"
             ><i class="bx bx-plus"></i
           ></a>
@@ -129,13 +129,14 @@ function recommendList(data) {
 
 
 function addSchedule(select) {
+
   var str = select.id.split(",");
   let loc = {
-		    title: str[0],
-		    mapx: str[1],
-		    mapy: str[2],
-		    contentId: str[3],
-		    contentTypeId: str[4],
+		    title: str[2],
+		    mapx: str[3],
+		    mapy: str[4],
+		    contentId: str[0],
+		    contentTypeId: str[1],
   };
 
   routes.push(loc);
