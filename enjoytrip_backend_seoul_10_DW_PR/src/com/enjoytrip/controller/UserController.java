@@ -41,6 +41,9 @@ public class UserController extends HttpServlet {
 		} else if ("join".equals(action)) {
 			path = join(request, response);
 			forward(request, response, path);
+		} else if ("findpassword".equals(action)) {
+			path = join(request, response);
+			forward(request, response, path);
 		}
 	}
 
@@ -95,7 +98,7 @@ public class UserController extends HttpServlet {
 				request.getParameter("yy") + "." + request.getParameter("mm") + "." + request.getParameter("dd"));
 		memberDto.setPhone(request.getParameter("mobile"));
 		System.out.println();
-		
+
 		try {
 			memberService.join(memberDto);
 			return "/user?action=mvlogin";
@@ -103,6 +106,43 @@ public class UserController extends HttpServlet {
 			e.printStackTrace();
 			return "/error/error.jsp";
 		}
+	}
+
+	private void findpassword(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			memberService.findPwSendEmail(request.getParameter(""));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	// 비밀번호 인증코드 인증
+	public void authenticate(HttpServletRequest request, HttpServletResponse response) {
+		int result = 0;
+		String inputCode = request.getParameter("inputCode");
+		String code = request.getParameter("code");
+		String id = request.getParameter("id");
+		result = memberService.checkCode(code, inputCode);
+		request.setAttribute("result", result);
+		request.setAttribute("id", id);
+	}
+
+	// 비밀번호 변경
+	public void changepw(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		int result = 0;
+		try {
+			System.out.println("변경할 pw:" + pw);
+			result = memberService.changePw(pw, id);
+			System.out.println("변경 완료");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("변경 실패");
+		}
+		request.setAttribute("result", result);
 	}
 
 }

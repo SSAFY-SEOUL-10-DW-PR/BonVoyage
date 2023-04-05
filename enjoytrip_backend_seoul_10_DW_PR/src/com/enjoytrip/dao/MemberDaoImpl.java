@@ -9,10 +9,10 @@ import com.enjoytrip.model.MemberDto;
 import com.enjoytrip.util.DBUtil;
 
 public class MemberDaoImpl implements MemberDao {
-	
+
 	private static MemberDao memberDao = new MemberDaoImpl();
 	private DBUtil dBUtil;
-	
+
 	private MemberDaoImpl() {
 		dBUtil = DBUtil.getInstance();
 	}
@@ -37,7 +37,7 @@ public class MemberDaoImpl implements MemberDao {
 			pstmt.setString(1, id);
 			pstmt.setString(2, pw);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				memberDto = new MemberDto();
 				memberDto.setId(rs.getString("user_id"));
 			}
@@ -46,7 +46,7 @@ public class MemberDaoImpl implements MemberDao {
 		}
 		return memberDto;
 	}
-	
+
 	@Override
 	public void join(MemberDto memberDto) throws SQLException {
 		Connection conn = null;
@@ -67,6 +67,23 @@ public class MemberDaoImpl implements MemberDao {
 		} finally {
 			dBUtil.close(pstmt, conn);
 		}
+	}
+
+	// update pw
+	public int updatePw(String pw, String id) throws SQLException {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = dBUtil.getConnection();
+			pstmt = conn.prepareStatement("update member set pw = ? where id = ?");
+			pstmt.setString(1, pw);
+			pstmt.setString(2, id);
+			result = pstmt.executeUpdate();
+		} finally {
+			dBUtil.close();
+		}
+		return result;
 	}
 
 }

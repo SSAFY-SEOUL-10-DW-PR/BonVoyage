@@ -40,9 +40,9 @@
                   <div class="inner"></div>
                   <button type="submit" id="LoginBtn">로그인</button>
                 </div>
-                <!-- <div class="forgot-pass">
-              <a href="/findPassword">비밀번호를 잊으셨나요?</a>
-              </div> -->
+                <div class="forgot-pass">
+              <a href="${root}/user?action=findPassword">비밀번호를 잊으셨나요?</a>
+              </div>
                 <div class="signup-link">
                   회원이 아니세요? <a href="#" onclick="Signin()">회원가입하기</a>
                 </div>

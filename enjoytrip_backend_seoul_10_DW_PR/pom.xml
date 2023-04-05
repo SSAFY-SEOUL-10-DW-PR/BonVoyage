@@ -3,6 +3,13 @@
   <groupId>enjoytrip_backend_seoul_10_DW_PR</groupId>
   <artifactId>enjoytrip_backend_seoul_10_DW_PR</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+<dependencies>
+<dependency>
+    <groupId>javax.mail</groupId>
+    <artifactId>javax.mail-api</artifactId>
+    <version>1.6.2</version>
+</dependency>
+</dependencies>
   <packaging>war</packaging>
   <build>
     <sourceDirectory>src</sourceDirectory>
