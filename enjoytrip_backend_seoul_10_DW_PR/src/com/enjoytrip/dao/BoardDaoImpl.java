@@ -175,13 +175,39 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public void modifyArticle(BoardDto boardDto) throws SQLException {
 		// TODO : 글번호에 해당하는 제목과 내용 변경.
-		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = dbUtil.getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("update board set title= ?, content= ? \n");
+			sql.append("where article_no = ?");
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setString(1, boardDto.getSubject());
+			pstmt.setString(2, boardDto.getContent());
+			pstmt.setInt(3, boardDto.getArticleNo());
+			pstmt.executeUpdate();
+		} finally {
+			dbUtil.close(pstmt, conn);
+		}
 	}
 
 	@Override
 	public void deleteArticle(int articleNO) throws SQLException {
 		// TODO : 글번호에 해당하는 글삭제
-		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = dbUtil.getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("delete from board \n");
+			sql.append("where article_no = ?");
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setInt(1, articleNO);
+			pstmt.executeUpdate();
+		} finally {
+			dbUtil.close(pstmt, conn);
+		}
 	}
 
 }

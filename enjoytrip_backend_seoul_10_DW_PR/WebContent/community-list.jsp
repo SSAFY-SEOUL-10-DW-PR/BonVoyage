@@ -87,7 +87,7 @@
                  --%>
               </div> 
               <div class="bt_wrap">
-                <a href="${root}/board?action=mvwrite" class="on" onclick="write()">등록</a>
+                <a href="${root}/board?action=mvwrite" class="on">등록</a>
                 <!-- <a href="#">수정</a> -->
               </div>
             </div>
@@ -122,16 +122,14 @@
         location.href = "${root}/board?action=view&articleno=" + this.getAttribute("data-no");
       });
     });
-
-    document.querySelector("#btn-mv-register").addEventListener("click", function () {
-      location.href = "${root}/board?action=mvwrite";
-    });
     
+    <%--
     document.querySelector("#btn-search").addEventListener("click", function () {
   	  let form = document.querySelector("#form-search");
         form.setAttribute("action", "${root}/board");
         form.submit();
     });
+    --%>
     
     let pages = document.querySelectorAll(".page-link");
     pages.forEach(function (page) {

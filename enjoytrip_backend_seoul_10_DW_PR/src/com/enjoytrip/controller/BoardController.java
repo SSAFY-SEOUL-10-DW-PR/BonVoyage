@@ -104,13 +104,10 @@ public class BoardController extends HttpServlet {
 				map.put("word", word);
 				
 				List<BoardDto> list = boardService.listArticle(map);
-				System.out.println("1");
 				request.setAttribute("articles", list);
-				System.out.println("2");
 				
 				PageNavigation pageNavigation = boardService.makePageNavigation(map);
 				request.setAttribute("navigation", pageNavigation);
-				System.out.println("3");
 
 				return "/community-list.jsp" + queryStrig;
 			} catch (Exception e) {
@@ -190,13 +187,17 @@ public class BoardController extends HttpServlet {
 		// TODO : 글수정 완료 후 view.jsp로 이동.(이후의 프로세스를 생각해 보세요.)
 		HttpSession session = request.getSession();
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		int articleNo = Integer.parseInt(request.getParameter("articleno"));
 		if (memberDto != null) {
-			int articleNo = Integer.parseInt(request.getParameter("articleno"));
+			BoardDto boardDto = new BoardDto();
+			boardDto.setArticleNo(articleNo);
+			boardDto.setSubject(request.getParameter("subject"));
+			boardDto.setContent(request.getParameter("content"));
 			try {
-				BoardDto boardDto = boardService.getArticle(articleNo);
+				boardService.modifyArticle(boardDto);
 				request.setAttribute("article", boardDto);
-
-				return "/board?action=list.jsp";
+				
+				return "/board?action=view&articleno="+articleNo;
 			} catch (Exception e) {
 				e.printStackTrace();
 				request.setAttribute("msg", "글내용 수정 중 문제 발생!!!");
@@ -210,7 +211,14 @@ public class BoardController extends HttpServlet {
 		// TODO : 삭제할 글 번호를 얻는다.
 		// TODO : 글번호를 파라미터로 service의 deleteArticle()을 호출.
 		// TODO : 글삭제 완료 후 list.jsp로 이동.(이후의 프로세스를 생각해 보세요.)
-		return null;
+		int articleNo = Integer.parseInt(request.getParameter("articleno"));
+		try {
+			boardService.deleteArticle(articleNo);
+			return "/board?action=list";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "/error/error.jsp";
+		}
 	}
 
 }

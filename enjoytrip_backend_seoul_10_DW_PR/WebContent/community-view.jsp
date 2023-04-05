@@ -17,7 +17,7 @@
 	<c:if test="${article eq null}">
 		<script>
 		alert("글이 삭제되었거나 부적절한 URL 접근입니다.");
-		location.href = "${root}/article?action=list";
+		location.href = "${root}/board?action=list";
 		</script>
 	</c:if>
 	
@@ -56,7 +56,7 @@
               </div>
               <div class="bt_wrap">
                 <a href="${root}/board?action=list" class="on">목록</a>
-                <a href="${root}/board?action=mvmodify">수정</a>
+                <a href="${root}/board?action=mvmodify&articleno=${article.articleNo}">수정</a>
               </div>
             </div>
           </div>

@@ -29,7 +29,7 @@
                   <dl>
                     <dt>제목</dt>
                     <dd>
-                      <input type="text" placeholder="제목 입력" id="subject" value="" />
+                      <input type="text" placeholder="제목 입력" id="subject" name="subject" value="" />
                     </dd>
                   </dl>
                 </div>
@@ -49,6 +49,7 @@
               </div>
               <div class="bt_wrap">
                 <a href="#" class="on" id="btn-modify">수정</a>
+                <a href="#" class="off" id="btn-delete">삭제</a>
                 <a href="#" id="btn-view">취소</a>
               </div>
           </form>
@@ -69,10 +70,13 @@
           return;
         } else {
           let form = document.querySelector("#form-modify");
-          form.setAttribute("action", "${root}/modify");
+          form.setAttribute("action", "${root}/board?action=modify&articleno=${article.articleNo}");
           form.submit();
         }
       });
+      document.querySelector("#btn-delete").addEventListener("click", function () {
+          location.href = "${root}/board?action=delete&articleno=${article.articleNo}";
+        });
       document.querySelector("#btn-view").addEventListener("click", function () {
         location.href = "${root}/board?action=view&articleno=${article.articleNo}";
       });
