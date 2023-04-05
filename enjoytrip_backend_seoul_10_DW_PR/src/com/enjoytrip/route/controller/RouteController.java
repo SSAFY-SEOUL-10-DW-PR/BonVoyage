@@ -105,6 +105,7 @@ public class RouteController extends HttpServlet {
 			String[] list = request.getParameterValues("routeElements");
 			List<AttractionDto> routeList = new ArrayList<>();
 			for (String attraction : list) {
+				System.out.println(attraction);
 				AttractionDto att = new AttractionDto(attraction);
 				routeList.add(att);
 			}
@@ -125,6 +126,7 @@ public class RouteController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
 		doGet(request, response);
 	}
 
