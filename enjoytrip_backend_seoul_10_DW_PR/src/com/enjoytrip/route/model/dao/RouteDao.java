@@ -10,8 +10,11 @@ import com.enjoytrip.route.model.RouteDto;
 
 public interface RouteDao {
 
-	void insertRoute(RouteDto routeDto) throws SQLException;
-	RouteDto selectRouteByUserId(String userId) throws SQLException;
-	void deleteRouteByUserId(String userId) throws SQLException;
+	int insert(RouteDto routeDto) throws SQLException;
+	int update(RouteDto routeDto) throws SQLException;
+	RouteDto selectById(int routeId) throws SQLException;
+	List<RouteDto> selectRouteByUserId(String userId) throws SQLException;
+	int deleteRouteByUserId(String userId) throws SQLException;
+	int deleteRouteById(int routeId)throws SQLException;
 	
 }

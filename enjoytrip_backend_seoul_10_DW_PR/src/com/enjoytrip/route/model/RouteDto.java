@@ -16,24 +16,25 @@ public class RouteDto {
 
 	public RouteDto(int routeId, String userId, List<AttractionDto> routeInfo) {
 		super();
-		this.routeId = routeId;
+		this.routeId=routeId;
 		this.userId = userId;
 		this.routeInfo = routeInfo;
 	}
 
-	public int getrouteId() {
+
+	public int getRouteId() {
 		return routeId;
 	}
 
-	public void setrouteId(int routeId) {
+	public void setRouteId(int routeId) {
 		this.routeId = routeId;
 	}
 
-	public String getuserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setuserId(String userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -41,7 +42,7 @@ public class RouteDto {
 		return routeInfo;
 	}
 
-	public void setRoute_info(List<AttractionDto> routeInfo) {
+	public void setRouteInfo(List<AttractionDto> routeInfo) {
 		this.routeInfo = routeInfo;
 	}
 	

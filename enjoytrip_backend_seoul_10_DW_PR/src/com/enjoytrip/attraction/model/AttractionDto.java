@@ -31,6 +31,16 @@ public class AttractionDto {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
+	public AttractionDto(String str) {
+		super();
+		String[] aDetail=str.split(",");
+		this.content_id = Integer.parseInt(aDetail[0]);
+		this.content_type_id = Integer.parseInt(aDetail[1]);
+		this.title = aDetail[2];
+		this.latitude = Double.parseDouble(aDetail[3]);
+		this.longitude = Double.parseDouble(aDetail[4]);
+	}
+	
 	public AttractionDto(int content_id, int content_type_id, String title, String addr1, String addr2, String zipcode,
 			String tel, String first_image, String first_image2, int readcount, int sido_code, int gugun_code,
 			double latitude, double longitude, String mlevel) {

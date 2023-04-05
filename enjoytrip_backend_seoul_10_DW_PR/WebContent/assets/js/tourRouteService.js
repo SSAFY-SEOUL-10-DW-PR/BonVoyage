@@ -102,10 +102,11 @@ function makeRoute() {
   let routeList = ``;
   let routeNo = 1;
     routes.forEach((route) => {
-      routeList += `<li name="routeElement"; id="${route.mapx},${route.mapy}";>${routeNo}. ${route.title}<input type="hidden" name="routeElement" value="${route.contentId},${route.contentTypeId},${route.title},${route.mapx},${route.mapy}"></li>
+      routeList += `<li name="routeElement"; id="${route.mapx},${route.mapy}";>${routeNo}. ${route.title} <button type="button" class="btm_image" id="img_btn"><img  src="assets/img/delete-button.png"></button><input type="hidden" name="routeElement" value="${route.contentId},${route.contentTypeId},${route.title},${route.mapx},${route.mapy}"></li>
       `;
       routeNo++;
     });
+   console.log(routeList);
   document.getElementById("sortlist").innerHTML = routeList;
   slist(document.getElementById("sortlist"));
   viewRoute();
@@ -125,6 +126,7 @@ function viewRoute() {
   routeList.forEach((routeLoc) => {
     var routeLocXY = routeLoc.id.split(",");
     routeLoc.innerHTML =routeNo+". "+routeLoc.innerText.slice(3);
+    console.log(routeLoc.innerHTML);
     console.log(routeLocXY[1], routeLocXY[0]);
     var imageSrc = `assets/img/marker/route/${routeNo}.png`; // 마커이미지의 크기입니다
     var markerImage = new kakao.maps.MarkerImage(imageSrc, new kakao.maps.Size(42, 50), { offset: new kakao.maps.Point(20, 45) });
