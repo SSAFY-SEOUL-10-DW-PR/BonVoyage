@@ -211,8 +211,11 @@
             <!-- <input type="hidden" name="action" value="save"> -->
               <ul id="sortlist"></ul>
             </div>
-            <button type="button" class="btn btn-outline-dark" id="routeView">경로보기</button>
-            <button type="submit" class="btn btn-outline-success" id="routeSave">경로저장</button>
+            <div style="display:flex; justify-content:center; flex-direction: row; padding:0px">
+            <button type="button" class="btn btn-outline-secondary" id="routeView" style="margin:15px 10px 15px 0px; width:100%">경로보기</button>
+            <button type="submit" class="btn btn-outline-success" id="routeSave" style="margin:15px 0px 15px 10px; width:100%">경로저장</button> 
+            </div>
+            <button type="button" class="btn btn-outline-info" id="routeLatestView" >최근 저장한 경로 불러오기</button>
           </div>
          </form>
         </div>
