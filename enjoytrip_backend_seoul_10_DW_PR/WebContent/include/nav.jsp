@@ -87,7 +87,7 @@
               >
             </li>
             <li>
-              <a class="nav-link scrollto" href="mypage.jsp" id="Mypage" style="display: none">Mypage</a>
+              <a class="nav-link scrollto" href="${root}/user?action=mvmypage" id="Mypage" style="display: none">Mypage</a>
             </li>
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>

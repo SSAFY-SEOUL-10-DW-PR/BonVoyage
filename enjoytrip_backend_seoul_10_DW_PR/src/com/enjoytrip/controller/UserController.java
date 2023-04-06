@@ -27,10 +27,15 @@ public class UserController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getParameter("action");
-
 		String path = "";
 		if ("mvlogin".equals(action)) {
 			path = "/inner-page.jsp";
+			redirect(request, response, path);
+		} else if ("mvmypage".equals(action)) {
+			path = mvmypage(request, response);
+			redirect(request, response, path);
+		} else if ("delete".equals(action)) {
+			path = delete(request, response);
 			redirect(request, response, path);
 		} else if ("login".equals(action)) {
 			path = login(request, response);
@@ -41,7 +46,10 @@ public class UserController extends HttpServlet {
 		} else if ("join".equals(action)) {
 			path = join(request, response);
 			forward(request, response, path);
-		} else if ("findID".equals(action)) {
+		} else if ("modify".equals(action)) {
+			path = modify(request, response);
+			forward(request, response, path);
+		}else if ("findID".equals(action)) {
 			path = findID(request, response);
 			redirect(request, response, path);
 		} else if ("checkQuestion".equals(action)) {
@@ -54,6 +62,48 @@ public class UserController extends HttpServlet {
 //		else if ("findPwSendEmail".equals(action)) {
 //			findPwSendEmail(request, response);
 //		}
+	}
+
+	private String delete(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		
+
+		try {
+			memberService.delete(memberDto);
+			session.removeAttribute("userinfo");
+			return "/inner-page.jsp";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "/error/error.jsp";
+		}
+	}
+
+	private String modify(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		memberDto.setPw(request.getParameter("pwd"));
+		memberDto.setEmail(request.getParameter("email_id"));
+		memberDto.setName(request.getParameter("uname"));
+		memberDto.setBirth(request.getParameter("birth"));
+		memberDto.setPhone(request.getParameter("mobile"));
+		memberDto.setQuestion(request.getParameter("question"));
+		memberDto.setAnswer(request.getParameter("answer"));
+
+		session.setAttribute("userinfo", memberDto);
+
+		try {
+			memberService.modify(memberDto);
+			return mvmypage(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "/error/error.jsp";
+		}
+	}
+
+	private String mvmypage(HttpServletRequest request, HttpServletResponse response) {
+		
+		return "/mypage.jsp";
 	}
 
 	private String findID(HttpServletRequest request, HttpServletResponse response) {

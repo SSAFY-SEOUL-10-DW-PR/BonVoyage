@@ -59,4 +59,15 @@ public class MemberServiceImpl implements MemberService {
 	public MemberDto findID(String user_id) throws Exception {
 		return memberDao.findID(user_id);
 	}
+
+	@Override
+	public void modify(MemberDto memberDto) throws SQLException {
+		memberDao.modify(memberDto);
+		
+	}
+
+	@Override
+	public void delete(MemberDto memberDto) throws SQLException {
+		memberDao.delete(memberDto);
+	}
 }
