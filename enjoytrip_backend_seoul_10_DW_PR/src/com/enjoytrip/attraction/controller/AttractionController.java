@@ -93,9 +93,9 @@ public class AttractionController extends HttpServlet {
 			for (ReviewDto reviewDto : reviews) {
 				MemberDto memberdto= memberService.findID(reviewDto.getUserId());
 				JSONObject obj=new JSONObject(reviewDto);
-				int age=(currentYear-Integer.parseInt(memberdto.getBirth().substring(0, 4))+1)/10*10;
+				//int age=(currentYear-Integer.parseInt(memberdto.getBirth().substring(0, 4))+1)/10*10;
 				obj.put("name", memberdto.getName());
-				obj.put("age", age);
+				obj.put("age", 20);
 				obj.put("sex", "woman");
 				jarray.put(obj);
 			}
