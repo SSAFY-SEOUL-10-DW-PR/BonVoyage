@@ -155,6 +155,9 @@
                 </div>
                 <div id="map" style="width: 800px; height: 600px"></div>
               </div>
+              <div>
+              <button style="margin: 15px 0px; width:100%" type="button" class="btn btn-outline-info" onclick="selectMainRoute()">경로에 담기</button>
+              </div>
             </div>
           </div>
         </div>
@@ -203,7 +206,6 @@
             <h2>내 여행 일정 확인하기</h2>
             <p>저장한 여행지들을 한눈에 확인할 수 있습니다.</p>
           </div>
-
           <form method="post" id="routeForm" action="${root}/route?action=save">
           <div class="row">
             <div class="col-lg-9" style="height: 600px" id="map-route"></div>
@@ -215,7 +217,8 @@
             <button type="button" class="btn btn-outline-secondary" id="routeView" style="margin:15px 10px 15px 0px; width:100%">경로보기</button>
             <button type="submit" class="btn btn-outline-success" id="routeSave" style="margin:15px 0px 15px 10px; width:100%">경로저장</button> 
             </div>
-            <button type="button" class="btn btn-outline-info" id="routeLatestView" onclick="location.href='${root}/route?action=load&type=latest'">최근 저장한 경로 불러오기</button>
+            <!-- <button type="button" class="btn btn-outline-info" id="routeLatestView" onclick="location.href='${root}/route?action=load&type=latest'">최근 저장한 경로 불러오기</button> -->
+            <button type="button" class="btn btn-outline-info" id="routeLatestView" onclick="loadLatestRoute()">최근 저장한 경로 불러오기</button>
           </div>
          </form>
         </div>
@@ -254,17 +257,15 @@
     <script src="assets/js/login.js"></script>
     <!-- extra function -->
     <script>
-    console.log("${hasDBElement}");
-        if("<%=request.getAttribute("hasDBElement")%>"!=null){
-        	refreshRoute();
-            <c:forEach var="attr" items="${routes}"> 
-            var hiddenInput = document.createElement("a");
-            hiddenInput.setAttribute("id", "${attr.contentId},${attr.contentTypeId},${attr.title},${attr.longitude},${attr.latitude}");
-            addSchedule(hiddenInput);
-			</c:forEach>   
-            <%request.removeAttribute("hasDBElement");%>
-            makeRoute();
-        }
+    
+    function loadLatestRoute(){
+    	<c:if test="${!empty userinfo}">
+    	  viewLatestRoute("${root}");
+    	</c:if>
+    	<c:if test="${empty userinfo}">
+    	   alert("로그인을 수행해 주세요");
+    	</c:if>
+    }
         </script>
     
   </body>

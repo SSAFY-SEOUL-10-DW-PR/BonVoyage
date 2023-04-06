@@ -90,7 +90,8 @@ document.getElementById("btn-search-keyword").addEventListener("click", function
     .then((data) => makeList(data));
 });
 
-
+var selectedMarker=null;
+var selectCustomOverlay=null;
 function makeList(data) {
   // console.log(data);
   let trips = data.response.body.items.item;
@@ -100,14 +101,14 @@ function makeList(data) {
   var listBounds = new kakao.maps.LatLngBounds();
   trips.forEach((area) => {
     triplist += `
-    <tr onclick="setDestination(this)" id="${area.mapx},${area.mapy}">
+    <tr onclick="setDestination(this)" id="${area.mapx},${area.mapy}" value="${area.contentid},${area.contenttypeid},${area.title},${area.mapx},${area.mapy}">
     <td>${no}</td>
       <td>${area.title}</td>
       <td>${area.addr1}</td>
     </tr>`;
     var imageSrc = `assets/img/marker/${area.contenttypeid}.png`, // 마커이미지의 주소입니다
       imageSize = new kakao.maps.Size(60, 60), // 마커이미지의 크기입니다
-      imageOption = { offset: new kakao.maps.Point(27, 69) };
+      imageOption = { offset: new kakao.maps.Point(30, 90) };
     var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
     markerPosition = new kakao.maps.LatLng(area.mapy, area.mapx);
     var marker = new kakao.maps.Marker({
@@ -119,22 +120,38 @@ function makeList(data) {
     listBounds.extend(markerPosition);
     
 
-    //인포윈도우를 생성합니다
-    var infowindow = new kakao.maps.InfoWindow({
-      position: markerPosition,
-      content: `<div style="text-align: center;">${area.title}</div>`,
-    });
+    var content = `<div class="customoverlay"> 
+    	   <span href="javascript:void(0);" onclick="setDestination(this)"; id="${area.mapx},${area.mapy}" target="_blank" value="${area.contentid},${area.contenttypeid},${area.title},${area.mapx},${area.mapy}"><span class="title">${area.title}</span></span> 
+    	 </div>`;
+    	    var overlayPosition=new kakao.maps.LatLng(area.mapy, area.mapx);
+    	    var customOverlay = new kakao.maps.CustomOverlay({
+    	      map: map,
+    	      position: overlayPosition,
+    	      content: content,
+    	      yAnchor: 1 
+    	    });
+    	    customOverlay.setMap(null);
+    	kakao.maps.event.addListener(marker, "mouseover", function () {
+    	  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+    	  customOverlay.setMap(map);
+    	});
 
-    kakao.maps.event.addListener(marker, "mouseover", function () {
-      // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
-      infowindow.open(map, marker);
-    });
+    	//클릭할시 오버레이 띄워놓음
+    	kakao.maps.event.addListener(marker, 'click', function() {
+    		  selectedMarker = marker;
+    		  
+    		  customOverlay.setMap(map);
+    		  if(selectCustomOverlay!=null){
+    		  selectCustomOverlay.setMap(null);}
+    		  selectCustomOverlay=customOverlay;
+    		});
 
-    // 마커에 마우스아웃 이벤트를 등록합니다
-    kakao.maps.event.addListener(marker, "mouseout", function () {
-      // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
-      infowindow.close();
-    });
+    	//
+    	kakao.maps.event.addListener(marker, "mouseout", function () {
+    		 if (!selectedMarker || selectedMarker != marker) {
+    		   customOverlay.setMap(null);
+    		  }
+    		 });
     no = no + 1;
   });
   map.setBounds(listBounds);

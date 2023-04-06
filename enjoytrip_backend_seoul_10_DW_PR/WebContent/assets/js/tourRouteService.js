@@ -186,7 +186,25 @@ function refreshRoute(){
 	routes.length=0;
 }
 
+function viewLatestRoute(root) {
+	 
+	  let location = root+"/route?action=load&type=latest";
+		refreshRoute();
+	   console.log(location);
+	  fetch(location)
+	    .then((response) => response.json())
+	    .then((data) => makeSavedRouteList(data));
+	}
 
+function makeSavedRouteList(data) {
+	  console.log(data);
+	  data.forEach(element => {
+	    var hiddenInput = document.createElement("a");
+	    hiddenInput.setAttribute("id", element.routeElement.split("/")[0]);
+	    addSchedule(hiddenInput);
+	  });
+	  makeRoute();
+	}
 
 
 

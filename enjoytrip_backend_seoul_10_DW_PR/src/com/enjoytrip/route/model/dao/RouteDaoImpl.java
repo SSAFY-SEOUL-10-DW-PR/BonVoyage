@@ -123,7 +123,7 @@ public class RouteDaoImpl implements RouteDao {
 				routeDto.setUserId(rs.getString("user_id"));
 				String[]routes=rs.getString("route_info").split("/");
 				List<AttractionDto> routeInfoList=new ArrayList<>();
-				for(int i=0;i<routes.length-1;i++) {
+				for(int i=0;i<routes.length;i++) {
 					String[] routeElement=routes[i].split(",");
 					System.out.println(i);
 					System.out.println(routeElement[0]+" "+routeElement[1]+" "+routeElement[2]+" "+routeElement[3]+" "+routeElement[4]);
