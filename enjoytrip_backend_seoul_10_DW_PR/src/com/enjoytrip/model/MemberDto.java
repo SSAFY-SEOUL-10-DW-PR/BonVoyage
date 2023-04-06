@@ -7,8 +7,26 @@ public class MemberDto {
 	private String name;
 	private String birth;
 	private String phone;
+	private String question;
+	private String answer;
 	private String authorization;
 	
+	public String getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
 	public String getAuthorization() {
 		return authorization;
 	}

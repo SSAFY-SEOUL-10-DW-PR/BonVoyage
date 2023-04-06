@@ -47,11 +47,11 @@ function joinform_check() {
   var pwd = document.getElementById("pwd");
   var repwd = document.getElementById("repwd");
   var uname = document.getElementById("uname");
-  var female = document.getElementById("female");
-  var male = document.getElementById("male");
+//  var female = document.getElementById("female");
+//  var male = document.getElementById("male");
   var mobile = document.getElementById("mobile");
   var email_id = document.getElementById("email_id");
-  var agree = document.getElementById("agree");
+//  var agree = document.getElementById("agree");
 
   if (uid.value == "") {
     //해당 입력값이 없을 경우 같은말: if(!uid.value)
@@ -87,12 +87,12 @@ function joinform_check() {
     return false;
   }
 
-  if (!female.checked && !male.checked) {
-    //둘다 미체크시
-    alert("성별을 선택해 주세요.");
-    female.focus();
-    return false;
-  }
+//  if (!female.checked && !male.checked) {
+//    //둘다 미체크시
+//    alert("성별을 선택해 주세요.");
+//    female.focus();
+//    return false;
+//  }
 
   var reg = /^[0-9]+/g; //숫자만 입력하는 정규식
 
@@ -154,6 +154,6 @@ function change_email() {
 }
 
 //우편번호 검색 팝업창(현재 공백문서)
-function search_address() {
-  window.open("", "b", "width=600, height=300, left=200, top=100");
-}
+//function search_address() {
+//  window.open("", "b", "width=600, height=300, left=200, top=100");
+//}

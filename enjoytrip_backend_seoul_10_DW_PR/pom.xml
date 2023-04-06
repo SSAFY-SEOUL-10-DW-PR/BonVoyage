@@ -24,7 +24,11 @@
       </plugin>
     </plugins>
   </build>
-  <dependencies>
+  <dependencies><dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.1</version>
+		</dependency>
   <dependency>
     <groupId>org.json</groupId>
     <artifactId>json</artifactId>

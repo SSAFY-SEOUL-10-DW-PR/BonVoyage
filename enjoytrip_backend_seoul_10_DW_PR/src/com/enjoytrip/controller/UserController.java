@@ -41,7 +41,66 @@ public class UserController extends HttpServlet {
 		} else if ("join".equals(action)) {
 			path = join(request, response);
 			forward(request, response, path);
+		} else if ("findID".equals(action)) {
+			path = findID(request, response);
+			redirect(request, response, path);
+		} else if ("checkQuestion".equals(action)) {
+			path = checkQuestion(request, response);
+			forward(request, response, path);
+		} else if ("changepw".equals(action)) {
+			path = changepw(request, response);
+			forward(request, response, path);
 		}
+//		else if ("findPwSendEmail".equals(action)) {
+//			findPwSendEmail(request, response);
+//		}
+	}
+
+	private String findID(HttpServletRequest request, HttpServletResponse response) {
+		String user_id = request.getParameter("id");
+		HttpSession session = request.getSession();
+		try {
+			MemberDto memberDto = memberService.findID(user_id);
+			if (memberDto != null) {
+				System.out.println(memberDto.getId() + " " + memberDto.getAnswer() + " " + memberDto.getQuestion());
+				session.setAttribute("findUser", memberDto);
+				session.setAttribute("findFlag", true);
+			} else {
+				session.setAttribute("IdNotFound", "해당 아이디는 존재하지 않습니다.");
+			}
+			return "/inner-page.jsp";
+		} catch (Exception e) {
+			return "/error/error.jsp";
+		}
+	}
+
+	private String checkQuestion(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		MemberDto memberDto = (MemberDto) session.getAttribute("findUser");
+		if (memberDto.getQuestion() != null && memberDto.getAnswer() != null)
+			if (memberDto.getQuestion().equals(request.getParameter("findQuestion"))
+					&& memberDto.getAnswer().equals(request.getParameter("findAnswer")))
+				session.setAttribute("checkFlag", 1);
+			else
+				session.setAttribute("questionError", "비밀번호 확인 질문 또는 답변이 틀렸습니다.");
+		return "/inner-page.jsp";
+	}
+
+	private String changepw(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		MemberDto memberDto = (MemberDto) session.getAttribute("findUser");
+		session.removeAttribute("findUser");
+		String id = memberDto.getId();
+		String pw = request.getParameter("newPassword");
+		int result = 0;
+		try {
+			result = memberService.changePw(pw, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "/error/error.jsp";
+		}
+		request.setAttribute("result", result);
+		return "/inner-page.jsp";
 	}
 
 	private String logout(HttpServletRequest request, HttpServletResponse response) {
@@ -94,8 +153,9 @@ public class UserController extends HttpServlet {
 		memberDto.setBirth(
 				request.getParameter("yy") + "." + request.getParameter("mm") + "." + request.getParameter("dd"));
 		memberDto.setPhone(request.getParameter("mobile"));
-		System.out.println();
-		
+		memberDto.setQuestion(request.getParameter("question"));
+		memberDto.setAnswer(request.getParameter("answer"));
+
 		try {
 			memberService.join(memberDto);
 			return "/user?action=mvlogin";
@@ -106,3 +166,39 @@ public class UserController extends HttpServlet {
 	}
 
 }
+
+//	private void findPwSendEmail(HttpServletRequest request, HttpServletResponse response) {
+//		try {
+//			memberService.findPwSendEmail(request.getParameter("email"));
+//			System.out.println("aag");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+//
+//	// 비밀번호 인증코드 인증
+//	public void authenticate(HttpServletRequest request, HttpServletResponse response) {
+//		int result = 0;
+//		String inputCode = request.getParameter("inputCode");
+//		String code = request.getParameter("code");
+//		String id = request.getParameter("id");
+//		result = memberService.checkCode(code, inputCode);
+//		request.setAttribute("result", result);
+//		request.setAttribute("id", id);
+//	}
+//
+//	// 비밀번호 변경
+//	public void changepw(HttpServletRequest request, HttpServletResponse response) {
+//		String id = request.getParameter("id");
+//		String pw = request.getParameter("pw");
+//		int result = 0;
+//		try {
+//			System.out.println("변경할 pw:" + pw);
+//			result = memberService.changePw(pw, id);
+//			System.out.println("변경 완료");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			System.out.println("변경 실패");
+//		}
+//		request.setAttribute("result", result);
+//	}
