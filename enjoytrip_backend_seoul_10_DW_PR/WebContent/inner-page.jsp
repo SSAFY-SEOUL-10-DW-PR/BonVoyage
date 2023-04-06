@@ -153,6 +153,8 @@
   	  document.querySelector("#find").style.display ="block";
   	  document.querySelector("#LoginPassword").style.display ="none";
 	  document.querySelector("#LoginBtn").style.display ="none";
+	  document.querySelector("#passwordquery").style.display ="none";
+	  
     	<%session = request.getSession();
 		session.removeAttribute("findFlag");%>
     	</c:if>
