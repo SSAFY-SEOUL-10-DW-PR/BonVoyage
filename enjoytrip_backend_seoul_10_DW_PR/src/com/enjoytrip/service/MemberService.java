@@ -13,4 +13,6 @@ public interface MemberService {
 	
 	String findPwSendEmail(String to) throws Exception;
 	int checkCode(String code, String inputCode);
+	void modify(MemberDto memberDto) throws SQLException;
+	void delete(MemberDto memberDto) throws SQLException;
 }

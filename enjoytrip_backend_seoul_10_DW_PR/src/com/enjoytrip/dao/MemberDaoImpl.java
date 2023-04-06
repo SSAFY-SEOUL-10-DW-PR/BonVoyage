@@ -31,7 +31,7 @@ public class MemberDaoImpl implements MemberDao {
 		try {
 			conn = dBUtil.getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append("select user_id, authorization \n");
+			sql.append("select user_id, user_pwd, email, name, birth, phone, question, answer, authorization \n");
 			sql.append("from user \n");
 			sql.append("where user_id = ? and user_pwd = ? \n");
 			pstmt = conn.prepareStatement(sql.toString());
@@ -41,6 +41,13 @@ public class MemberDaoImpl implements MemberDao {
 			if(rs.next()) {
 				memberDto = new MemberDto();
 				memberDto.setId(rs.getString("user_id"));
+				memberDto.setPw(rs.getString("user_pwd"));
+				memberDto.setEmail(rs.getString("email"));
+				memberDto.setName(rs.getString("name"));
+				memberDto.setBirth(rs.getString("birth"));
+				memberDto.setPhone(rs.getString("phone"));
+				memberDto.setQuestion(rs.getString("question"));
+				memberDto.setAnswer(rs.getString("answer"));
 				memberDto.setAuthorization(rs.getString("authorization"));
 			}
 		} finally {
@@ -116,6 +123,49 @@ public class MemberDaoImpl implements MemberDao {
 			}
 			return memberDto;
 			
+	}
+
+	@Override
+	public void modify(MemberDto memberDto) throws SQLException {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = dBUtil.getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("update user set user_pwd = ?, email = ?, name = ?, birth = ?, phone = ?, question = ?, answer = ? \n");
+			sql.append("where user_id = ?");
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setString(1, memberDto.getPw());
+			pstmt.setString(2, memberDto.getEmail());
+			pstmt.setString(3, memberDto.getName());
+			pstmt.setString(4, memberDto.getBirth());
+			pstmt.setString(5, memberDto.getPhone());
+			pstmt.setString(6, memberDto.getQuestion());
+			pstmt.setString(7, memberDto.getAnswer());
+			pstmt.setString(8, memberDto.getId());
+			pstmt.executeUpdate();
+		} finally {
+			dBUtil.close(pstmt, conn);
+		}
+		
+	}
+
+	@Override
+	public void delete(MemberDto memberDto) throws SQLException {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = dBUtil.getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("delete from user \n");
+			sql.append("where user_id = ?");
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setString(1, memberDto.getId());
+			pstmt.executeUpdate();
+		} finally {
+			dBUtil.close(pstmt, conn);
+		}
+		
 	}
 
 }

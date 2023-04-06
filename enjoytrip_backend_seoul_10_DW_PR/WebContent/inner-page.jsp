@@ -96,9 +96,6 @@
 								<a href="#" onclick="ForgotPassword()" id="passwordquery">비밀번호를
 									잊으셨나요?</a>
 								<script>
-          	<c:if test="${!empty msg}">
-    		alert("${msg}");
-    	</c:if>
         function ForgotPassword(){
       	  document.querySelector("#LoginPassword").style.display ="none";
     	  document.querySelector("#LoginBtn").style.display ="none";

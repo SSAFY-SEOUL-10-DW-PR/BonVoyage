@@ -10,4 +10,6 @@ public interface MemberDao {
 	void join(MemberDto memberDto) throws SQLException;
 	int updatePw(String pw, String id) throws SQLException;
 	MemberDto findID(String user_id) throws SQLException;
+	void modify(MemberDto memberDto) throws SQLException;
+	void delete(MemberDto memberDto) throws SQLException;
 }
