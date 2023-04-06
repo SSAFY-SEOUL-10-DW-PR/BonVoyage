@@ -64,6 +64,7 @@ public class UserController extends HttpServlet {
 			if (memberDto != null) {
 				System.out.println(memberDto.getId() + " " + memberDto.getAnswer() + " " + memberDto.getQuestion());
 				session.setAttribute("findUser", memberDto);
+				session.setAttribute("findFlag", true);
 			} else {
 				session.setAttribute("IdNotFound", "해당 아이디는 존재하지 않습니다.");
 			}
@@ -76,10 +77,6 @@ public class UserController extends HttpServlet {
 	private String checkQuestion(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		MemberDto memberDto = (MemberDto) session.getAttribute("findUser");
-		System.out.println(memberDto.getQuestion());
-		System.out.println(memberDto.getAnswer());
-		System.out.println(request.getParameter("findQuestion"));
-		System.out.println(request.getParameter("findAnswer"));
 		if (memberDto.getQuestion() != null && memberDto.getAnswer() != null)
 			if (memberDto.getQuestion().equals(request.getParameter("findQuestion"))
 					&& memberDto.getAnswer().equals(request.getParameter("findAnswer")))
@@ -97,12 +94,9 @@ public class UserController extends HttpServlet {
 		String pw = request.getParameter("newPassword");
 		int result = 0;
 		try {
-			System.out.println("변경할 pw:" + pw);
 			result = memberService.changePw(pw, id);
-			System.out.println("변경 완료");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("변경 실패");
 			return "/error/error.jsp";
 		}
 		request.setAttribute("result", result);

@@ -138,13 +138,23 @@
         	 form.submit();
         	} else alert("비밀번호가 일치하지 않습니다.")
         }
-      	<c:if test="${!empty findUser}">
+        
+
+      	<c:if test="${!empty result}">
+      	alert("비밀번호 변경 완료!");
+    	<%session = request.getSession();
+		session.removeAttribute("result");%>
+    	</c:if>
+        
+      	<c:if test="${!empty findFlag}">
     	  document.querySelector("#id").style.display ="none";
   	  document.querySelector("#next-btn").style.display ="none";
     	  document.querySelector("#findQ-btn").style.display ="block";
   	  document.querySelector("#find").style.display ="block";
   	  document.querySelector("#LoginPassword").style.display ="none";
 	  document.querySelector("#LoginBtn").style.display ="none";
+    	<%session = request.getSession();
+		session.removeAttribute("findFlag");%>
     	</c:if>
 
       	<c:if test="${!empty IdNotFound}">
