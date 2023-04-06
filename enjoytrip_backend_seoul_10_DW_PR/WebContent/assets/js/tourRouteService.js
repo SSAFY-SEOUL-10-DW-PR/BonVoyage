@@ -32,7 +32,7 @@ function slist(target) {
     i.ondragend = () => { for (let it of items) {
       it.classList.remove("hint");
       it.classList.remove("active");
-      viewRoute()
+      viewRoute();
     }};
 
     // (B6) DRAG OVER - PREVENT THE DEFAULT "DROP", SO WE CAN DO OUR OWN
@@ -88,7 +88,7 @@ function isBefore(el1, el2) {
     return false;
 }
 
-document.getElementById("gogo").addEventListener("click", function () {
+document.getElementById("routeView").addEventListener("click", function () {
   makeRoute();
 });
 
@@ -102,10 +102,11 @@ function makeRoute() {
   let routeList = ``;
   let routeNo = 1;
     routes.forEach((route) => {
-      routeList += `<li name="routeElement"; id="${route.mapx},${route.mapy}">${routeNo}. ${route.title}</li>
+      routeList += `<li name="routeElement"; id="${route.mapx},${route.mapy}";>${routeNo}. ${route.title} <button type="button" class="btn_img" id="img_btn"><img  src="assets/img/close.png"></button><input type="hidden" name="routeElements" value="${route.contentId},${route.contentTypeId},${route.title},${route.mapx},${route.mapy}"></li>
       `;
       routeNo++;
     });
+   console.log(routeList);
   document.getElementById("sortlist").innerHTML = routeList;
   slist(document.getElementById("sortlist"));
   viewRoute();
@@ -113,6 +114,8 @@ function makeRoute() {
 
 var polyline;
 function viewRoute() {
+  refreshRoute();
+console.log(localStorage.getItem("routeJson"));
   var routeList = document.getElementsByName("routeElement");
   console.log(routeList);
   let routeNo = 1;
@@ -122,10 +125,31 @@ function viewRoute() {
   if (polyline != undefined||polyline!=null) { 
   polyline.setMap(null);
 }
+  console.log(routeList.length)
   routeList.forEach((routeLoc) => {
     var routeLocXY = routeLoc.id.split(",");
-    routeLoc.innerHTML =routeNo+". "+routeLoc.innerText.slice(3);
-    console.log(routeLocXY[1], routeLocXY[0]);
+    let routeHidden = document.getElementById(routeLoc.id).childNodes;
+//    console.log(routeHidden);
+//    console.log(routeHidden.item(1));
+//    console.log(typeof(routeHidden.item(1)));
+//    console.log(routeHidden[2]);
+    let btn = document.createElement("img");
+    btn.setAttribute("src", "assets/img/close.png");
+    btn.setAttribute("class", "btn_img");
+    btn.setAttribute("onclick", "deleteRouteElement(this)");
+    let hiddenInput = document.createElement("input");
+    hiddenInput.setAttribute("type", "hidden");
+    hiddenInput.setAttribute("name", "routeElements");
+    hiddenInput.setAttribute("id", routeHidden[2].value);
+    hiddenInput.setAttribute("value", routeHidden[2].value);
+    console.log(hiddenInput);
+    addSchedule(hiddenInput);
+    
+    routeLoc.innerHTML = routeNo + ". " + routeLoc.innerText.slice(3);
+    routeLoc.appendChild(btn);
+    routeLoc.appendChild(hiddenInput);
+//  routeLoc.append(routeHidden.item(1));
+//  routeLoc.append(routeHidden[2]);
     var imageSrc = `assets/img/marker/route/${routeNo}.png`; // 마커이미지의 크기입니다
     var markerImage = new kakao.maps.MarkerImage(imageSrc, new kakao.maps.Size(42, 50), { offset: new kakao.maps.Point(20, 45) });
     markerPosition = new kakao.maps.LatLng(Number(routeLocXY[1]), Number(routeLocXY[0]));
@@ -151,9 +175,36 @@ function viewRoute() {
   mapRoute.setBounds(routeBounds);
 }
 
+function deleteRouteElement(select){
+	let deleteLi=select.parentElement;
+	deleteLi.parentElement.removeChild(deleteLi);
+	viewRoute();
+}
 
+function refreshRoute(){
+	localStorage.removeItem("routeJson");
+	routes.length=0;
+}
 
+function viewLatestRoute(root) {
+	 
+	  let location = root+"/route?action=load&type=latest";
+		refreshRoute();
+	   console.log(location);
+	  fetch(location)
+	    .then((response) => response.json())
+	    .then((data) => makeSavedRouteList(data));
+	}
 
+function makeSavedRouteList(data) {
+	  console.log(data);
+	  data.forEach(element => {
+	    var hiddenInput = document.createElement("a");
+	    hiddenInput.setAttribute("id", element.routeElement.split("/")[0]);
+	    addSchedule(hiddenInput);
+	  });
+	  makeRoute();
+	}
 
 
 

@@ -2,6 +2,7 @@ let recommendUrl = `https://apis.data.go.kr/B551011/KorService1/locationBasedLis
 let routes = new Array();
 
 var prevSelectId = "";
+var prevSelectInfo="";
 function setDestination(select) {
   // console.log(prevSelectId);
   if (prevSelectId != "") {
@@ -9,14 +10,16 @@ function setDestination(select) {
       document.getElementById(prevSelectId).style = "";
     }
   }
-  select.style.backgroundColor = "#99d2ec";
+  //select.style.backgroundColor = "#99d2ec";
+  document.getElementById(select.id).style.backgroundColor="#99d2ec";
   prevSelectId = select.id;
+  prevSelectInfo = select.getAttribute("value");
   var str = select.id.split(",");
   var mapx = str[0];
   var mapy = str[1];
 
   map.setCenter(new kakao.maps.LatLng(mapy, mapx));
-
+  map.setLevel(3);
   let location = recommendUrl + "&mapX=" + mapx + "&mapY=" + mapy + "&radius=5000";
 
   // console.log(location);
@@ -29,7 +32,7 @@ function setDestination(select) {
  * Easy event listener function
  */
 function recommendList(data) {
-  // console.log(data);
+   console.log("aaaaa");
   var trips = data.response.body.items.item;
   // var recommendlist = `<div class="row portfolio-container" data-aos="fade-up">`;
   var recommendlist = "";
@@ -68,7 +71,7 @@ function recommendList(data) {
             data-gallery="portfolioGallery"
             class="portfolio-lightbox"
             title="${area.title}"
-            id = "${area.title},${area.mapx},${area.mapy},${area.contentid},${area.contenttypeid}"
+            id = "${area.contentid},${area.contenttypeid},${area.title},${area.mapx},${area.mapy}"
             onclick="addSchedule(this)"
             ><i class="bx bx-plus"></i
           ></a>
@@ -127,13 +130,15 @@ function recommendList(data) {
 }
 
 function addSchedule(select) {
+
   var str = select.id.split(",");
   let loc = {
-    title: str[0],
-    mapx: str[1],
-    mapy: str[2],
-    contentId: str[3],
-    contentTypeId: str[4],
+		    title: str[2],
+		    mapx: str[3],
+		    mapy: str[4],
+		    contentId: str[0],
+		    contentTypeId: str[1],
+
   };
 
   routes.push(loc);
@@ -142,4 +147,11 @@ function addSchedule(select) {
     routes: routes,
   };
   localStorage.setItem("routeJson", JSON.stringify(routeJson));
+}
+
+function selectMainRoute(){
+    var hiddenInput = document.createElement("a");
+    hiddenInput.setAttribute("id", prevSelectInfo);
+    addSchedule(hiddenInput);
+	
 }

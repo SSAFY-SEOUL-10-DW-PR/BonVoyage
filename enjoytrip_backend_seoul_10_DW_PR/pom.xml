@@ -3,12 +3,6 @@
   <groupId>enjoytrip_backend_seoul_10_DW_PR</groupId>
   <artifactId>enjoytrip_backend_seoul_10_DW_PR</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-<dependencies><dependency>
-			<groupId>com.sun.mail</groupId>
-			<artifactId>javax.mail</artifactId>
-			<version>1.6.1</version>
-		</dependency>
-</dependencies>
   <packaging>war</packaging>
   <build>
     <sourceDirectory>src</sourceDirectory>
@@ -30,4 +24,15 @@
       </plugin>
     </plugins>
   </build>
+  <dependencies><dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+  <dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20180813</version>
+</dependency>
+  </dependencies>
 </project>
