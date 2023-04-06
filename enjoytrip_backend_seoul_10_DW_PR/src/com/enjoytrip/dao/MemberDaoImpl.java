@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.enjoytrip.model.BoardDto;
 import com.enjoytrip.model.MemberDto;
 import com.enjoytrip.util.DBUtil;
 
@@ -37,12 +38,7 @@ public class MemberDaoImpl implements MemberDao {
 			pstmt.setString(1, id);
 			pstmt.setString(2, pw);
 			rs = pstmt.executeQuery();
-<<<<<<< HEAD
-			if (rs.next()) {
-=======
-			System.out.println(rs.toString());
 			if(rs.next()) {
->>>>>>> DBconnection
 				memberDto = new MemberDto();
 				memberDto.setId(rs.getString("user_id"));
 				memberDto.setAuthorization(rs.getString("authorization"));
@@ -60,8 +56,8 @@ public class MemberDaoImpl implements MemberDao {
 		try {
 			conn = dBUtil.getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append("insert into user (user_id, user_pwd, email, name, birth, phone) \n");
-			sql.append("values (?, ?, ?, ?, ?, ?)");
+			sql.append("insert into user (user_id, user_pwd, email, name, birth, phone, question, answer) \n");
+			sql.append("values (?, ?, ?, ?, ?, ?, ?, ?)");
 			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setString(1, memberDto.getId());
 			pstmt.setString(2, memberDto.getPw());
@@ -69,6 +65,8 @@ public class MemberDaoImpl implements MemberDao {
 			pstmt.setString(4, memberDto.getName());
 			pstmt.setString(5, memberDto.getBirth());
 			pstmt.setString(6, memberDto.getPhone());
+			pstmt.setString(7, memberDto.getQuestion());
+			pstmt.setString(8, memberDto.getAnswer());
 			pstmt.executeUpdate();
 		} finally {
 			dBUtil.close(pstmt, conn);
@@ -82,14 +80,42 @@ public class MemberDaoImpl implements MemberDao {
 		PreparedStatement pstmt = null;
 		try {
 			conn = dBUtil.getConnection();
-			pstmt = conn.prepareStatement("update member set pw = ? where id = ?");
+			pstmt = conn.prepareStatement("update user set user_pwd = ? where user_id = ?");
 			pstmt.setString(1, pw);
 			pstmt.setString(2, id);
 			result = pstmt.executeUpdate();
 		} finally {
-			dBUtil.close();
+			dBUtil.close(pstmt, conn);
 		}
 		return result;
+	}
+
+	@Override
+	public MemberDto findID(String user_id) throws SQLException {
+			MemberDto memberDto = null;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				conn = dBUtil.getConnection();
+				StringBuilder sql = new StringBuilder();
+				sql.append("select user_id, question, answer \n");
+				sql.append("from user \n");
+				sql.append("where user_id = ?");
+				pstmt = conn.prepareStatement(sql.toString());
+				pstmt.setString(1, user_id);
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					memberDto = new MemberDto();
+					memberDto.setId(rs.getString("user_id"));
+					memberDto.setQuestion(rs.getString("question"));
+					memberDto.setAnswer(rs.getString("answer"));
+				}
+			} finally {
+				dBUtil.close(rs, pstmt, conn);
+			}
+			return memberDto;
+			
 	}
 
 }

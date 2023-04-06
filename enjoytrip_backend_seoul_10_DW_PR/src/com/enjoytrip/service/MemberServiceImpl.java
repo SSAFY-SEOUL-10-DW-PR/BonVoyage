@@ -54,4 +54,9 @@ public class MemberServiceImpl implements MemberService {
 	public int changePw(String pw, String id) throws SQLException {
 		return memberDao.updatePw(pw, id);
 	}
+
+	@Override
+	public MemberDto findID(String user_id) throws Exception {
+		return memberDao.findID(user_id);
+	}
 }
