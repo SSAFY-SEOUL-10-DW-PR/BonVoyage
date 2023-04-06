@@ -6,7 +6,7 @@ public class ReviewDto {
 	private 	String userId;
 	private int contentId;
 	private int contentTypeId;
-	private String content;
+	private String reviewContent;
 	public int getReviewId() {
 		return reviewId;
 	}
@@ -31,19 +31,20 @@ public class ReviewDto {
 	public void setContentTypeId(int contentTypeId) {
 		this.contentTypeId = contentTypeId;
 	}
-	public String getContent() {
-		return content;
+
+	public String getReviewContent() {
+		return reviewContent;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setReviewContent(String reviewContent) {
+		this.reviewContent = reviewContent;
 	}
-	public ReviewDto(int reviewId, String userId, int contentId, int contentTypeId, String content) {
+	public ReviewDto(int reviewId, String userId, int contentId, int contentTypeId, String reviewContent) {
 		super();
 		this.reviewId = reviewId;
 		this.userId = userId;
 		this.contentId = contentId;
 		this.contentTypeId = contentTypeId;
-		this.content = content;
+		this.reviewContent = reviewContent;
 	}
 	public ReviewDto() {
 		super();
