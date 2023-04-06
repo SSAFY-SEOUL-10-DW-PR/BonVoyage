@@ -115,7 +115,6 @@ public class UserController extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	// 비밀번호 인증코드 인증

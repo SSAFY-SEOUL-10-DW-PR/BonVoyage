@@ -27,8 +27,8 @@
                   <input type="text" id="LoginId" name="id" required />
                 </div>
                   <div id="findmail" style="display : none">
-                  <label>이메일</label>
-                  <input type="text" id="findemail" name="findemail" required />
+                  <label id="mailCodePw">이메일</label>
+                  <input type="text" id="findemail" name="findemail" />
                   </div>
                 <div class="data" id="LoginPassword">
                   <label>비밀번호</label>
@@ -43,8 +43,10 @@
                 <div class="btn">
                   <div class="inner"></div>
                   <button type="submit" id="LoginBtn">로그인</button>
-                  <button type="button" onclick="sendCode()" id="sendAuthenticCode" style = "display : none">인증번호 전송</button>
-                  <button type="button" onclick="putCode()" id="putAuthenticCode" style = "display : none">인증번호 입력</button>
+                  <span></span>
+                  <button type="button" onclick="sendCode()" id="sendAuthenticCode-btn" style = "display : none">인증번호 전송</button>
+                  <button type="button" onclick="putCode()" id="putAuthenticCode-btn" style = "display : none">인증번호 입력</button>
+                  <button type="button" onclick="newPassword()" id="newPw-btn" style = "display : none">비밀번호 변경</button>
                 </div>
                 <div class="forgot-pass">
                 <%--${root}/user?action=findPassword --%>
@@ -56,17 +58,23 @@
             	  document.querySelector("#findmail").style.display ="block";
             	  document.querySelector("#passwordquery").style.display ="none";
             	  document.querySelector("#LoginBtn").style.display ="none";
-            	  document.querySelector("#sendAuthenticCode").style.display ="block";
+            	  document.querySelector("#sendAuthenticCode-btn").style.display ="inline";
               }
               
               function sendCode(){
-            	  document.querySelector("#sendAuthenticCode").style.display ="none";
-            	  document.querySelector("#putAuthenticCode").style.display ="block";
+            	  <%--document.querySelector("#sendAuthenticCode").style.display ="none";--%>
+            	  document.querySelector("#sendAuthenticCode-btn").innerHTML = "재전송"
+                  document.querySelector("#mailCodePw").innerHTML = "인증번호"
+            	  document.querySelector("#putAuthenticCode-btn").style.display ="inline";
               }
 
               function putCode(){
         	  	location.href= "${root}/user?action=findPassword ";
               }
+              
+              function newPassword(){
+          	  	location.href= "${root}/user?action=findPassword ";
+                }
               </script>
               </div>
                 <div class="signup-link">
