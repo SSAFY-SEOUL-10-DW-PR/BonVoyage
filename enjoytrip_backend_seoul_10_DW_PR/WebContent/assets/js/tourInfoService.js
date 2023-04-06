@@ -38,7 +38,7 @@ document.getElementById("dropdownMenu").addEventListener("click", function () {
   let areaUrl2 =
     "https://apis.data.go.kr/B551011/KorService1/areaCode1?serviceKey=" +
     serviceKey +
-    "&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&areaCode=" +
+    "&numOfRows=31&pageNo=1&MobileOS=ETC&MobileApp=AppTest&areaCode=" +
     areaCode +
     "&_type=json";
 
