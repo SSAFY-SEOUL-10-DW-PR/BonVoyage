@@ -1,6 +1,5 @@
 let recommendUrl = `https://apis.data.go.kr/B551011/KorService1/locationBasedList1?serviceKey=${serviceKey}&numOfRows=100&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A`;
 let routes = new Array();
-
 var prevSelectId = "";
 var prevSelectInfo="";
 function setDestination(select) {
@@ -31,7 +30,7 @@ function setDestination(select) {
 /**
  * Easy event listener function
  */
-function recommendList(data) {
+function recommendList(data,root) {
    console.log("aaaaa");
   var trips = data.response.body.items.item;
   // var recommendlist = `<div class="row portfolio-container" data-aos="fade-up">`;

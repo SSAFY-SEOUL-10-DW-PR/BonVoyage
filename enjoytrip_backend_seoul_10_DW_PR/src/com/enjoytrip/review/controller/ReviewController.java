@@ -2,6 +2,7 @@ package com.enjoytrip.review.controller;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,172 +16,78 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ssafy.board.model.BoardDto;
-import com.ssafy.board.model.service.ReviewService;
-import com.ssafy.board.model.service.ReviewServiceImpl;
-import com.ssafy.member.model.MemberDto;
-import com.ssafy.util.PageNavigation;
-import com.ssafy.util.ParameterCheck;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-@WebServlet("/article")
+import com.enjoytrip.review.model.service.ReviewService;
+import com.enjoytrip.review.model.service.ReviewServiceImpl;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+
+@WebServlet("/review")
 public class ReviewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private int pgno;
-	private String key;
-	private String word;
-	private String queryStrig;
 	
-	private ReviewService ReviewService;
+	private ReviewService reviewService;
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		ReviewService = ReviewServiceImpl.getReviewService();
+		reviewService = ReviewServiceImpl.getReviewService();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		String action = request.getParameter("action");
-		
-		pgno = ParameterCheck.notNumberToOne(request.getParameter("pgno"));
-		key = ParameterCheck.nullToBlank(request.getParameter("key"));
-		word = ParameterCheck.nullToBlank(request.getParameter("word"));
-		queryStrig = "?pgno=" + pgno + "&key=" + key + "&word=" + URLEncoder.encode(word, "utf-8");
-
 		String path = "";
-		if ("list".equals(action)) {
-			path = list(request, response);
+		if ("detail".equals(action)) {
+			path = save(request, response);
 			forward(request, response, path);
-		} else if ("view".equals(action)) {
-			path = view(request, response);
-			forward(request, response, path);
-		} else if ("mvwrite".equals(action)) {
-			path = "/board/write.jsp";
-			redirect(request, response, path);
-		} else if ("write".equals(action)) {
-			path = write(request, response);
-//			redirect(request, response, path);
-			forward(request, response, path);
-		} else if ("mvmodify".equals(action)) {
-			path = mvModify(request, response);
-			forward(request, response, path);
-		} else if ("modify".equals(action)) {
-			path = modify(request, response);
-			forward(request, response, path);
-		} else if ("delete".equals(action)) {
-			path = delete(request, response);
-			redirect(request, response, path);
-		} else {
-			redirect(request, response, path);
 		}
+//		} else if ("load".equals(action)) {
+//			String type = request.getParameter("type");
+//			if ("latest".equals(type)) {
+//				loadLatesttRoute(request,response);}
+////			}else if ("all".equals(type)) {
+////				
+////			}else if ("certain".equals(type)) {
+////				
+////			}
+//		} else if ("delete".equals(action)) {
+//			path = delete(request, response);
+//			redirect(request, response, path);
+//		} else if ("modify".equals(action)) {
+//			path = modify(request, response);
+//			redirect(request, response, path);
+//		} else {
+//			redirect(request, response, path);
+//		}
+	}
+	
+	private String save(HttpServletRequest request, HttpServletResponse response) {
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		doGet(request, response);
-	}
-
-	private void forward(HttpServletRequest request, HttpServletResponse response, String path)
-			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-		dispatcher.forward(request, response);
 	}
 
 	private void redirect(HttpServletRequest request, HttpServletResponse response, String path) throws IOException {
 		response.sendRedirect(request.getContextPath() + path);
 	}
 
-	private String list(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession session = request.getSession();
-		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-		if (memberDto != null) {
-			try {
-				Map<String, String> map = new HashMap<String, String>();
-				map.put("pgno", pgno + "");
-				map.put("key", key);
-				map.put("word", word);
-				
-				List<BoardDto> list = ReviewService.listArticle(map);
-				request.setAttribute("articles", list);
-				
-				PageNavigation pageNavigation = ReviewService.makePageNavigation(map);
-				request.setAttribute("navigation", pageNavigation);
-
-				return "/board/list.jsp" + queryStrig;
-			} catch (Exception e) {
-				e.printStackTrace();
-				request.setAttribute("msg", "글목록 출력 중 문제 발생!!!");
-				return "/error/error.jsp";
-			}
-		} else
-			return "/user/login.jsp";
+	private void forward(HttpServletRequest request, HttpServletResponse response, String path)
+			throws IOException, ServletException {
+		RequestDispatcher disp = request.getRequestDispatcher(path);
+		disp.forward(request, response);
 	}
 
-	private String view(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession session = request.getSession();
-		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-		if (memberDto != null) {
-			int articleNo = Integer.parseInt(request.getParameter("articleno"));
-			try {
-				BoardDto boardDto = ReviewService.getArticle(articleNo);
-				ReviewService.updateHit(articleNo);
-				request.setAttribute("article", boardDto);
-
-				return "/board/view.jsp";
-			} catch (Exception e) {
-				e.printStackTrace();
-				request.setAttribute("msg", "글내용 출력 중 문제 발생!!!");
-				return "/error/error.jsp";
-			}
-		} else
-			return "/user/login.jsp";
-	}
-
-	private String write(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession session = request.getSession();
-		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-		if (memberDto != null) {
-			BoardDto boardDto = new BoardDto();
-			boardDto.setUserId(memberDto.getUserId());
-			boardDto.setSubject(request.getParameter("subject"));
-			boardDto.setContent(request.getParameter("content"));
-			try {
-				String subject= boardDto.getSubject();
-				for(int i=0;i<50;i++) {
-					boardDto.setSubject(subject+".."+1);
-					ReviewService.writeArticle(boardDto);
-					Thread.sleep(59);
-				}
-				return "/article?action=list";
-			} catch (Exception e) {
-				e.printStackTrace();
-				request.setAttribute("msg", "글작성 중 문제 발생!!!");
-				return "/error/error.jsp";
-			}
-		} else
-			return "/user/login.jsp";
-	}
-
-	private String mvModify(HttpServletRequest request, HttpServletResponse response) {
-		// TODO : 수정하고자하는 글의 글번호를 얻는다.
-		// TODO : 글번호에 해당하는 글정보를 얻고 글정보를 가지고 modify.jsp로 이동.
-		return null;
-	}
-
-	private String modify(HttpServletRequest request, HttpServletResponse response) {
-		// TODO : 수정 할 글정보를 얻고 BoardDto에 set.
-		// TODO : boardDto를 파라미터로 service의 modifyArticle() 호출.
-		// TODO : 글수정 완료 후 view.jsp로 이동.(이후의 프로세스를 생각해 보세요.)
-		return null;
-	}
-
-	private String delete(HttpServletRequest request, HttpServletResponse response) {
-		// TODO : 삭제할 글 번호를 얻는다.
-		// TODO : 글번호를 파라미터로 service의 deleteArticle()을 호출.
-		// TODO : 글삭제 완료 후 list.jsp로 이동.(이후의 프로세스를 생각해 보세요.)
-		return null;
-	}
 
 }

@@ -81,7 +81,7 @@ public class ReviewDaoImpl implements ReviewDao {
 		try {
 			conn=dbUtil.getConnection();
 			StringBuilder sql= new StringBuilder();
-			sql.append("select user_id, content_id, content_type_id, review_content from review where review_id=?");
+			sql.append("select review_id, user_id, content_id, content_type_id, review_content from review where review_id=?");
 			pstmt=conn.prepareStatement(sql.toString());
 			pstmt.setInt(1, reviewId);
 			rs=pstmt.executeQuery();
@@ -109,7 +109,7 @@ public class ReviewDaoImpl implements ReviewDao {
 				try {
 					conn=dbUtil.getConnection();
 					StringBuilder sql= new StringBuilder();
-					sql.append("select user_id, content_id, content_type_id, review_content from review where content_id=?");
+					sql.append("select review_id, user_id, content_id, content_type_id, review_content from review where content_id=?");
 					pstmt=conn.prepareStatement(sql.toString());
 					pstmt.setInt(1, attractionId);
 					rs=pstmt.executeQuery();
@@ -138,7 +138,7 @@ public class ReviewDaoImpl implements ReviewDao {
 		try {
 			conn=dbUtil.getConnection();
 			StringBuilder sql= new StringBuilder();
-			sql.append("select user_id, content_id, content_type_id, review_content from review where user_id=?");
+			sql.append("select review_id, user_id, content_id, content_type_id, review_content from review where user_id=?");
 			pstmt=conn.prepareStatement(sql.toString());
 			pstmt.setString(1, userId);
 			rs=pstmt.executeQuery();
