@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="javax.servlet.http.HttpSession, com.enjoytrip.model.MemberDto"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="assets/css/community.css" />
   </head>
 
+<%
+MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+String authority = memberDto.getAuthorization();
+%>
   <body>
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top header-transparent">
@@ -14,6 +18,13 @@
     </header>
     <!-- End Header -->
 
+	<c:if test="${article eq null}">
+		<script>
+		alert("글이 삭제되었거나 부적절한 URL 접근입니다.");
+		location.href = "${root}/board?action=list";
+		</script>
+	</c:if>
+	
     <section id="bg">
       <div class="hero-container" data-aos="fade-up">
         <main id="main">
@@ -24,39 +35,35 @@
             </div>
             <div class="board_view_wrap">
               <div class="board_view">
-                <div class="title">글 제목이 들어갑니다.</div>
+                <div class="title">${article.subject}</div>
                 <div class="info">
                   <dl>
                     <dt>번호</dt>
-                    <dd>1</dd>
+                    <dd>${article.articleNo}</dd>
                   </dl>
                   <dl>
                     <dt>글쓴이</dt>
-                    <dd>김이름</dd>
+                    <dd>${article.userId}</dd>
                   </dl>
                   <dl>
                     <dt>작성일</dt>
-                    <dd>2023.3.17</dd>
+                    <dd>${article.registerTime}</dd>
                   </dl>
                   <dl>
                     <dt>조회</dt>
-                    <dd>33</dd>
+                    <dd>${article.hit}</dd>
                   </dl>
                 </div>
-                <div class="cont">
-                  글 내용이 들어갑니다<br />
-                  글 내용이 들어갑니다<br />
-                  글 내용이 들어갑니다<br />
-                  글 내용이 들어갑니다<br />
-                  글 내용이 들어갑니다<br />
-                  글 내용이 들어갑니다<br />
-                  글 내용이 들어갑니다<br />
-                  글 내용이 들어갑니다
+                <div class="cont"> 
+                ${article.content}
                 </div>
               </div>
               <div class="bt_wrap">
-                <a href="community-list.jsp" class="on">목록</a>
-                <a href="community-edit.jsp">수정</a>
+                <a href="${root}/board?action=list" class="on">목록</a>
+              <c:set var="authority" value = "<%=authority %>"/>
+              <c:if test="${authority eq 'admin'}">
+                <a href="${root}/board?action=mvmodify&articleno=${article.articleNo}">수정</a>
+              </c:if>
               </div>
             </div>
           </div>

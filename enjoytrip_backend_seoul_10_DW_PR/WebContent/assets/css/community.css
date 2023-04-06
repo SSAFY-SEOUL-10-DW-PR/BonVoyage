@@ -154,6 +154,11 @@ a {
     color: #fff;
 }
 
+.bt_wrap a.off {
+    background: red;
+    color: #fff;
+}
+
 .board_list {
     width: 100%;
     border-top: 2px solid #000;
@@ -373,3 +378,16 @@ a {
     border: 0;
     resize: vertical;
 }
+/*
+#wrapper{
+  height: auto;
+  min-height: 100%; 
+  padding-bottom: 92px;
+}
+
+footer {
+	height: 92px;
+    position: relative;
+    transform: translatY(-100%);
+}
+*/

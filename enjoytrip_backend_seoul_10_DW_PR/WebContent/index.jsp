@@ -210,7 +210,7 @@
               <ul id="sortlist"></ul>
             </div>
             <button id="gogo">경로보기</button>
-            <button id="gogo">경로저장</button>
+            <button id="saveRoute">경로저장</button>
           </div>
         </div>
         <script></script>

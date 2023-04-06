@@ -49,7 +49,7 @@ public class UserController extends HttpServlet {
 
 	private String logout(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
-		session.removeAttribute("userInfo");
+		session.removeAttribute("userinfo");
 		return "";
 	}
 
@@ -76,7 +76,7 @@ public class UserController extends HttpServlet {
 			MemberDto memberDto = memberService.login(user_id, user_pwd);
 			if (memberDto != null) {
 				HttpSession session = request.getSession();
-				session.setAttribute("userInfo", memberDto);
+				session.setAttribute("userinfo", memberDto);
 				return "/index.jsp";
 			} else {
 				request.setAttribute("msg", "아이디 또는 비번 확인!!!!");
