@@ -111,10 +111,10 @@ function descList(data) {
     hiddenField1.setAttribute('name', "tripImg");
     hiddenField1.setAttribute('value', JSON.stringify(tripImg));
     form.appendChild(hiddenField1);
-    var hiddenField2 = document.createElement('input');
-    hiddenField2.setAttribute('type', 'hidden'); //값 입력
-    hiddenField2.setAttribute('name', "desc");
-    hiddenField2.setAttribute('value', desc);
+    var hiddenField4 = document.createElement('input');
+    hiddenField4.setAttribute('type', 'hidden'); //값 입력
+    hiddenField4.setAttribute('name', "desc");
+    hiddenField4.setAttribute('value', desc);
     var hiddenField3 = document.createElement('input');
     hiddenField3.setAttribute('type', 'hidden'); //값 입력
     hiddenField3.setAttribute('name', "title");
@@ -123,6 +123,7 @@ function descList(data) {
     
     document.body.appendChild(form);
     console.log(tripImg);
+console.log(desc);
 console.log(typeof(desc));
 console.log(tripDetail);
     form.target="_blank";

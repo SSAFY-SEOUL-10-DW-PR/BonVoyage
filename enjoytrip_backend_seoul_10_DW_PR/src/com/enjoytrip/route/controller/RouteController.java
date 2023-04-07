@@ -151,7 +151,7 @@ public class RouteController extends HttpServlet {
 				return "/error/error.jsp";
 			}
 		} else
-			return "/user/login.jsp";
+			return "/inner-page.jsp";
 
 	}
 
