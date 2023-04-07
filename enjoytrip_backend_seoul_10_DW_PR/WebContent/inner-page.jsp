@@ -96,6 +96,8 @@
 								<a href="#" onclick="ForgotPassword()" id="passwordquery">비밀번호를
 									잊으셨나요?</a>
 								<script>
+								
+						    	
         function ForgotPassword(){
       	  document.querySelector("#LoginPassword").style.display ="none";
     	  document.querySelector("#LoginBtn").style.display ="none";
@@ -339,6 +341,16 @@
 			</div>
 		</div>
 	</section>
+	
+	<script>
+  	<c:if test="${!empty duplicateMsg}">
+  	alert("${duplicateMsg}");
+    document.getElementById("logininit").style.display = "none";
+    document.getElementById("signIn").style.display = "block";
+  	<%session = request.getSession();
+			session.removeAttribute("duplicateMsg");%>
+	</c:if>
+	</script>
 	<!-- End Hero -->
 
 	<!-- <main id="main"></main> -->

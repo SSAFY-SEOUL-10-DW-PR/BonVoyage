@@ -26,8 +26,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void join(MemberDto memberDto) throws Exception {
-		memberDao.join(memberDto);
+	public int join(MemberDto memberDto) throws Exception {
+		return memberDao.join(memberDto);
 	}
 	
 	// 비밀번호 찾기 인증 코드 보내기

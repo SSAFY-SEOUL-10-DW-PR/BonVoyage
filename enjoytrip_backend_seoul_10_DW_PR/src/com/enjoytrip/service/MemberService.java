@@ -7,7 +7,7 @@ import com.enjoytrip.model.MemberDto;
 public interface MemberService {
 
 	MemberDto login(String user_id, String user_pwd) throws Exception;
-	void join(MemberDto memberDto) throws Exception;
+	int join(MemberDto memberDto) throws Exception;
 	MemberDto findID(String user_id) throws Exception;
 	int changePw(String pw, String id) throws Exception;
 	MemberDto findMemberInfo(String userId) throws Exception;
