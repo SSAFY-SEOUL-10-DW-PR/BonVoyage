@@ -91,11 +91,12 @@ public class AttractionController extends HttpServlet {
 	        int currentYear  = current.get(Calendar.YEAR);
 	        JSONArray jarray= new JSONArray();
 			for (ReviewDto reviewDto : reviews) {
-				MemberDto memberdto= memberService.findID(reviewDto.getUserId());
+				System.out.println(reviewDto.getUserId());
+				MemberDto memberdto= memberService.findMemberInfo(reviewDto.getUserId());
 				JSONObject obj=new JSONObject(reviewDto);
-				//int age=(currentYear-Integer.parseInt(memberdto.getBirth().substring(0, 4))+1)/10*10;
+				int age=(currentYear-Integer.parseInt(memberdto.getBirth().substring(0, 4))+1)/10*10;
 				obj.put("name", memberdto.getName());
-				obj.put("age", 20);
+				obj.put("age", age);
 				obj.put("sex", "woman");
 				jarray.put(obj);
 			}

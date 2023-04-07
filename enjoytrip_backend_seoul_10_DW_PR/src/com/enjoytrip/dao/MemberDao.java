@@ -12,4 +12,5 @@ public interface MemberDao {
 	MemberDto findID(String user_id) throws SQLException;
 	void modify(MemberDto memberDto) throws SQLException;
 	void delete(MemberDto memberDto) throws SQLException;
+	MemberDto getUserInfo(String userId) throws SQLException;
 }

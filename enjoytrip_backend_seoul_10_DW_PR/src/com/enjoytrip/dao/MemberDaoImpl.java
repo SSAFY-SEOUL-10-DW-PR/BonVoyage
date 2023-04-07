@@ -168,4 +168,36 @@ public class MemberDaoImpl implements MemberDao {
 		
 	}
 
+	@Override
+	public MemberDto getUserInfo(String userId) throws SQLException {
+		MemberDto memberDto = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = dBUtil.getConnection();
+			StringBuilder sql = new StringBuilder();
+			sql.append("select user_id, email, name, birth, phone, question, answer, authorization \n");
+			sql.append("from user \n");
+			sql.append("where user_id = ?");
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				memberDto = new MemberDto();
+				memberDto.setId(rs.getString("user_id"));
+				memberDto.setEmail(rs.getString("email"));
+				memberDto.setName(rs.getString("name"));
+				memberDto.setBirth(rs.getString("birth"));
+				memberDto.setPhone(rs.getString("phone"));
+				memberDto.setQuestion(rs.getString("question"));
+				memberDto.setAnswer(rs.getString("answer"));
+				memberDto.setAuthorization(rs.getString("authorization"));
+			}
+		} finally {
+			dBUtil.close(rs, pstmt, conn);
+		}
+		return memberDto;
+	}
+
 }

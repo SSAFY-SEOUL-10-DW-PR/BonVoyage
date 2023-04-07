@@ -70,4 +70,10 @@ public class MemberServiceImpl implements MemberService {
 	public void delete(MemberDto memberDto) throws SQLException {
 		memberDao.delete(memberDto);
 	}
+
+	@Override
+	public MemberDto findMemberInfo(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		return memberDao.getUserInfo(userId);
+	}
 }
