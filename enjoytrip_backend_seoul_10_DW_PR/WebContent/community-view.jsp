@@ -54,8 +54,7 @@ String authority = memberDto.getAuthorization();
                     <dd>${article.hit}</dd>
                   </dl>
                 </div>
-                <div class="cont"> 
-                ${article.content}
+                <div class="cont"> <p style="white-space: pre-line;">${article.content}</p>
                 </div>
               </div>
               <div class="bt_wrap">
