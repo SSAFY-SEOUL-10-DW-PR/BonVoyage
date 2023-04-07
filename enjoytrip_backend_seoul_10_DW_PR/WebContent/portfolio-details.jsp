@@ -151,7 +151,7 @@
     <script src="assets/js/login.js"></script>
     <script src="assets/js/detail-Info.js"></script>
     <script>
-
+console.log("${title}");
 console.log("${reviewers}");
 </script>
   </body>

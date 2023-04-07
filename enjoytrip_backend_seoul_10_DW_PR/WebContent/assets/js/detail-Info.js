@@ -115,7 +115,11 @@ function descList(data) {
     hiddenField2.setAttribute('type', 'hidden'); //값 입력
     hiddenField2.setAttribute('name', "desc");
     hiddenField2.setAttribute('value', desc);
-    form.appendChild(hiddenField2);
+    var hiddenField3 = document.createElement('input');
+    hiddenField3.setAttribute('type', 'hidden'); //값 입력
+    hiddenField3.setAttribute('name', "title");
+    hiddenField3.setAttribute('value', title);
+    form.appendChild(hiddenField3);
     
     document.body.appendChild(form);
     console.log(tripImg);

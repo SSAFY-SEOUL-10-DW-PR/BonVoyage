@@ -84,6 +84,7 @@ public class AttractionController extends HttpServlet {
 		request.setAttribute("desc",request.getParameter("desc"));
 		request.setAttribute("tripDetail",tripDetail);
 		request.setAttribute("tripImg",tripImg);
+		request.setAttribute("title", request.getParameter("title"));
 		
 		try {
 			List<ReviewDto> reviews=reviewService.getReviewByAttraction(contentId);
