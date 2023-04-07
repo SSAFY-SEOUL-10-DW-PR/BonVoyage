@@ -48,6 +48,8 @@
 
             <div class="col-lg-4" id="">
               <div class="portfolio-info" id="location-info">
+                <h3>${title}</h3>
+  <ul>
                 <c:if test="${tripDetail.contenttypeid eq 12}">
                 <li><strong>분류</strong> : 관광지</li>
         <li><strong>이용 문의</strong> : ${tripDetail.infocenter}</li>
@@ -68,6 +70,7 @@
         <li><strong>이용 시간</strong> : ${tripDetail.opentimefood}</li>
         <li><strong>휴무일</strong> : ${tripDetail.restdatefood}</li>
                 </c:if>
+                </ul>
                 <!-- <h3>Project information</h3>
                 <ul>
                   <li><strong>Category</strong>: Web design</li>
@@ -121,7 +124,53 @@
             </div>
             <div class="swiper-pagination"></div>
           </div>
+          <script>
+    const exampleModal = document.getElementById('exampleModal');
+    exampleModal.addEventListener('show.bs.modal', event => {
+      // Button that triggered the modal
+      const button = event.relatedTarget;
+      // Extract info from data-bs-* attributes
+      const recipient = button.getAttribute('data-bs-whatever');
+      // If necessary, you could initiate an AJAX request here
+      // and then do the updating in a callback.
+      //
+      // Update the modal's content.
+      const modalTitle = exampleModal.querySelector('.modal-title');
+      const modalBodyInput = exampleModal.querySelector('.modal-body input');
+
+      modalTitle.textContent = `New message to ${recipient}`;
+      modalBodyInput.value = recipient;
+    });
+</script>
+<button type="button" style="margin: auto; display: block" class="btn btn-outline-info mt-3" data-aos="fade-up" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">리뷰 작성하기</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">New Review for ${title}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="${root}/review?action=write">
+          <div class="mb-3">
+        <input type="hidden" name="contentId" value="${tripDetail.contentid}">
+        <input type="hidden" name="contentTypeId" value="${tripDetail.contenttypeid}">
+        <input type="hidden" name="title" value="${title}">
+            <label for="message-text" class="col-form-label">한줄 리뷰 남기기:</label>
+            <textarea class="form-control" id="message-text" name="reviewContent"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">저장하기</button>
+      </div>
+    </div>
+  </div>
+</div>
         </div>
+            
       </section>
       <!-- End Testimonials Section -->
     </main>
@@ -150,10 +199,14 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/login.js"></script>
     <script src="assets/js/detail-Info.js"></script>
+<<<<<<< HEAD
     <script>
 console.log("${title}");
 console.log("${reviewers}");
 </script>
+=======
+
+>>>>>>> review
   </body>
 </html>
     
