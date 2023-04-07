@@ -76,6 +76,14 @@
             </li> -->
             <li><a class="nav-link scrollto" href="index.jsp#contact">plan</a></li>
             <li><a class="nav-link scrollto" href="${root}/user?action=mvlogin" id="Login">Login</a></li>
+            <li class="dropdown">
+              <a href="#" style="display: none" class="nav-link scrollto" id="Mypage"><span>My Page</span> <i class="bi bi-chevron-down"></i></a>
+              <ul>
+                <li><a href="${root}/review?action=mypage">작성한 리뷰</a></li>
+                <li><a href="${root}/route?action=mypage">저장한 경로</a></li>
+                <li><a href="${root}/modify-member-info.jsp">회원정보 수정</a></li>
+              </ul>
+            </li>
             <li>
               <a
                 class="nav-link scrollto"
@@ -86,9 +94,7 @@
                 >Logout</a
               >
             </li>
-            <li>
-              <a class="nav-link scrollto" href="${root}/user?action=mvmypage" id="Mypage" style="display: none">Mypage</a>
-            </li>
+
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>

@@ -115,6 +115,7 @@ function descList(data) {
     hiddenField4.setAttribute('type', 'hidden'); //값 입력
     hiddenField4.setAttribute('name', "desc");
     hiddenField4.setAttribute('value', desc);
+    form.appendChild(hiddenField4);
     var hiddenField3 = document.createElement('input');
     hiddenField3.setAttribute('type', 'hidden'); //값 입력
     hiddenField3.setAttribute('name', "title");

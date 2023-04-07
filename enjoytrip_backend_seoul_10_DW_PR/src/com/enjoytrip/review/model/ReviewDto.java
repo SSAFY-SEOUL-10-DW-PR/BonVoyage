@@ -1,5 +1,7 @@
 package com.enjoytrip.review.model;
 
+import java.util.Date;
+
 public class ReviewDto {
 	
 	private int reviewId;
@@ -7,8 +9,22 @@ public class ReviewDto {
 	private int contentId;
 	private int contentTypeId;
 	private String reviewContent;
+	private String location;
+private String writeDate;
 	public int getReviewId() {
 		return reviewId;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getWriteDate() {
+		return writeDate;
+	}
+	public void setWriteDate(String string) {
+		this.writeDate = string;
 	}
 	public void setReviewId(int reviewId) {
 		this.reviewId = reviewId;

@@ -1,8 +1,10 @@
 package com.enjoytrip.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.enjoytrip.model.MemberDto;
+import com.enjoytrip.review.model.ReviewDto;
+import com.enjoytrip.review.model.service.ReviewService;
+import com.enjoytrip.review.model.service.ReviewServiceImpl;
 import com.enjoytrip.service.MemberService;
 import com.enjoytrip.service.MemberServiceImpl;
 
@@ -45,11 +50,11 @@ public class UserController extends HttpServlet {
 			forward(request, response, path);
 		} else if ("join".equals(action)) {
 			path = join(request, response);
-			forward(request, response, path);
+			redirect(request, response, path);
 		} else if ("modify".equals(action)) {
 			path = modify(request, response);
 			forward(request, response, path);
-		}else if ("findID".equals(action)) {
+		} else if ("findID".equals(action)) {
 			path = findID(request, response);
 			redirect(request, response, path);
 		} else if ("checkQuestion".equals(action)) {
@@ -67,7 +72,6 @@ public class UserController extends HttpServlet {
 	private String delete(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-		
 
 		try {
 			memberService.delete(memberDto);
@@ -97,13 +101,13 @@ public class UserController extends HttpServlet {
 			return mvmypage(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "/error/error.jsp";
+			return "/modify-member-info.jsp";
 		}
 	}
 
 	private String mvmypage(HttpServletRequest request, HttpServletResponse response) {
-		
-		return "/mypage.jsp";
+
+		return "/modify-member-info.jsp";
 	}
 
 	private String findID(HttpServletRequest request, HttpServletResponse response) {
@@ -207,7 +211,11 @@ public class UserController extends HttpServlet {
 		memberDto.setAnswer(request.getParameter("answer"));
 
 		try {
-			memberService.join(memberDto);
+//			if (memberService.join(memberDto) == 0) {
+//				HttpSession session = request.getSession();
+//				session.setAttribute("duplicateMsg", "아이디 중복!!");
+//				return "/inner-page.jsp";
+//			}
 			return "/user?action=mvlogin";
 		} catch (Exception e) {
 			e.printStackTrace();
