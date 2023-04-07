@@ -29,7 +29,7 @@
                   <dl>
                     <dt>제목</dt>
                     <dd>
-                      <input type="text" placeholder="제목 입력" id="subject" name="subject" value="" />
+                      <input type="text" placeholder="제목 입력" id="subject" name="subject" value="${article.subject}" />
                     </dd>
                   </dl>
                 </div>
@@ -44,7 +44,7 @@
                   </dl>
                 </div>
                 <div class="cont">
-                  <textarea placeholder="내용 입력" id="content" name="content"></textarea>
+                  <textarea placeholder="내용 입력" id="content" name="content" >${article.content}</textarea>
                 </div>
               </div>
               <div class="bt_wrap">
