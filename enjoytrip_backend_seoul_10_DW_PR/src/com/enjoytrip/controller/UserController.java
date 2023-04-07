@@ -107,11 +107,7 @@ public class UserController extends HttpServlet {
 
 	private String mvmypage(HttpServletRequest request, HttpServletResponse response) {
 
-<<<<<<< HEAD
-		return "/mypage.jsp";
-=======
 		return "/modify-member-info.jsp";
->>>>>>> mypage
 	}
 
 	private String findID(HttpServletRequest request, HttpServletResponse response) {
@@ -215,19 +211,11 @@ public class UserController extends HttpServlet {
 		memberDto.setAnswer(request.getParameter("answer"));
 
 		try {
-<<<<<<< HEAD
 			if (memberService.join(memberDto) == 0) {
 				HttpSession session = request.getSession();
 				session.setAttribute("duplicateMsg", "아이디 중복!!");
 				return "/inner-page.jsp";
 			}
-=======
-//			if (memberService.join(memberDto) == 0) {
-//				HttpSession session = request.getSession();
-//				session.setAttribute("duplicateMsg", "아이디 중복!!");
-//				return "/inner-page.jsp";
-//			}
->>>>>>> mypage
 			return "/user?action=mvlogin";
 		} catch (Exception e) {
 			e.printStackTrace();
