@@ -19,6 +19,9 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.enjoytrip.model.BoardDto;
+import com.enjoytrip.model.MemberDto;
+import com.enjoytrip.review.model.ReviewDto;
 import com.enjoytrip.review.model.service.ReviewService;
 import com.enjoytrip.review.model.service.ReviewServiceImpl;
 import com.google.gson.Gson;
@@ -44,8 +47,8 @@ public class ReviewController extends HttpServlet {
 		// TODO Auto-generated method stub
 		String action = request.getParameter("action");
 		String path = "";
-		if ("detail".equals(action)) {
-			path = save(request, response);
+		if ("write".equals(action)) {
+			path = write(request, response);
 			forward(request, response, path);
 		}
 //		} else if ("load".equals(action)) {
@@ -68,8 +71,26 @@ public class ReviewController extends HttpServlet {
 //		}
 	}
 	
-	private String save(HttpServletRequest request, HttpServletResponse response) {
-
+	private String write(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		if (memberDto != null) {
+			ReviewDto reviewDto= new ReviewDto();
+			reviewDto.setUserId(memberDto.getId());
+			reviewDto.setContentId(Integer.parseInt(request.getParameter("contentId")));
+			reviewDto.setContentTypeId(Integer.parseInt(request.getParameter("contentTypeId")));
+			reviewDto.setReviewContent(request.getParameter("reviewConent"));;
+			
+			try {
+				reviewService.createReview(reviewDto);
+				return "/portfolio-details.jsp";
+			} catch (Exception e) {
+				e.printStackTrace();
+				request.setAttribute("msg", "문제 발생!!!");
+				return "/error/error.jsp";
+			}
+		} else
+			return "/inner-page.jsp";
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
