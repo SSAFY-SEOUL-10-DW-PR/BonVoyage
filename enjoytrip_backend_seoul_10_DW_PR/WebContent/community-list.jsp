@@ -98,6 +98,19 @@ String authority = memberDto.getAuthorization();
                 <!-- <a href="#">수정</a> -->
               </div>
               </c:if>
+              <div style = "text-align:center; padding:30px">
+              <input
+                    id="search-keyword-input"
+                    type="search"
+                    style="width: 70%; display: inline"
+                    class="form-control rounded"
+                    placeholder="Search"
+                    aria-label="Search"
+                  />
+                  <button type="button" class="btn btn-outline-secondary" id="btn-search-keyword" onclick = "searchBoard()">
+                    search
+                  </button>
+              </div>
             </div>
           </div>
         </main>
@@ -112,6 +125,12 @@ String authority = memberDto.getAuthorization();
       <input type="hidden" id="p-word" name="word" value="">
     </form>
 
+              <script>
+              function searchBoard(){
+                  location.href = "${root}/board?action=list&pgno=" + "${param.key}"+  "&key=title&word=" +document.querySelector("#search-keyword-input").value;
+              }
+              </script>
+              
     <!-- ======= Footer ======= -->
     <footer id="footer">
 	<%@ include file="/include/footer.jsp" %>
