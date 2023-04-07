@@ -45,11 +45,11 @@ public class UserController extends HttpServlet {
 			forward(request, response, path);
 		} else if ("join".equals(action)) {
 			path = join(request, response);
-			forward(request, response, path);
+			redirect(request, response, path);
 		} else if ("modify".equals(action)) {
 			path = modify(request, response);
 			forward(request, response, path);
-		}else if ("findID".equals(action)) {
+		} else if ("findID".equals(action)) {
 			path = findID(request, response);
 			redirect(request, response, path);
 		} else if ("checkQuestion".equals(action)) {
@@ -67,7 +67,6 @@ public class UserController extends HttpServlet {
 	private String delete(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
-		
 
 		try {
 			memberService.delete(memberDto);
@@ -102,7 +101,7 @@ public class UserController extends HttpServlet {
 	}
 
 	private String mvmypage(HttpServletRequest request, HttpServletResponse response) {
-		
+
 		return "/mypage.jsp";
 	}
 
@@ -207,7 +206,11 @@ public class UserController extends HttpServlet {
 		memberDto.setAnswer(request.getParameter("answer"));
 
 		try {
-			memberService.join(memberDto);
+			if (memberService.join(memberDto) == 0) {
+				HttpSession session = request.getSession();
+				session.setAttribute("duplicateMsg", "아이디 중복!!");
+				return "/inner-page.jsp";
+			}
 			return "/user?action=mvlogin";
 		} catch (Exception e) {
 			e.printStackTrace();

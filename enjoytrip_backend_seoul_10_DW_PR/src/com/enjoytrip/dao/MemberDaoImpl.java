@@ -57,7 +57,7 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public void join(MemberDto memberDto) throws SQLException {
+	public int join(MemberDto memberDto) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -75,9 +75,12 @@ public class MemberDaoImpl implements MemberDao {
 			pstmt.setString(7, memberDto.getQuestion());
 			pstmt.setString(8, memberDto.getAnswer());
 			pstmt.executeUpdate();
+		} catch (Exception e) {
+			return 0;
 		} finally {
 			dBUtil.close(pstmt, conn);
 		}
+		return 1;
 	}
 
 	// update pw
