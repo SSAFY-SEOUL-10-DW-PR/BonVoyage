@@ -51,16 +51,11 @@ public class ReviewController extends HttpServlet {
 			path = write(request, response);
 			forward(request, response, path);
 		}
-//		} else if ("load".equals(action)) {
-//			String type = request.getParameter("type");
-//			if ("latest".equals(type)) {
-//				loadLatesttRoute(request,response);}
-////			}else if ("all".equals(type)) {
-////				
-////			}else if ("certain".equals(type)) {
-////				
-////			}
-//		} else if ("delete".equals(action)) {
+		 else if ("mypage".equals(action)) {
+			 path=mypage(request, response);
+			 forward(request, response, path);
+		 }
+		//} else if ("delete".equals(action)) {
 //			path = delete(request, response);
 //			redirect(request, response, path);
 //		} else if ("modify".equals(action)) {
@@ -71,6 +66,23 @@ public class ReviewController extends HttpServlet {
 //		}
 	}
 	
+	private String mypage(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		if (memberDto != null) {
+			try {
+			List<ReviewDto> reviews=reviewService.getReviewByUser(memberDto.getId());
+			request.setAttribute("reviews", reviews);
+				return "/mypage-review.jsp";
+			} catch (Exception e) {
+				e.printStackTrace();
+				request.setAttribute("msg", "문제 발생!!!");
+				return "/error/error.jsp";
+			}
+		} else
+			return "/inner-page.jsp";
+	}
+
 	private String write(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
@@ -79,11 +91,11 @@ public class ReviewController extends HttpServlet {
 			reviewDto.setUserId(memberDto.getId());
 			reviewDto.setContentId(Integer.parseInt(request.getParameter("contentId")));
 			reviewDto.setContentTypeId(Integer.parseInt(request.getParameter("contentTypeId")));
-			reviewDto.setReviewContent(request.getParameter("reviewConent"));;
-			
+			reviewDto.setReviewContent(request.getParameter("reviewContent"));
+			reviewDto.setLocation(request.getParameter("title"));
 			try {
 				reviewService.createReview(reviewDto);
-				return "/portfolio-details.jsp";
+				return "/review?action=mypage";
 			} catch (Exception e) {
 				e.printStackTrace();
 				request.setAttribute("msg", "문제 발생!!!");

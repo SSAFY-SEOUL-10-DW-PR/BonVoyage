@@ -1,8 +1,10 @@
 package com.enjoytrip.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.enjoytrip.model.MemberDto;
+import com.enjoytrip.review.model.ReviewDto;
+import com.enjoytrip.review.model.service.ReviewService;
+import com.enjoytrip.review.model.service.ReviewServiceImpl;
 import com.enjoytrip.service.MemberService;
 import com.enjoytrip.service.MemberServiceImpl;
 
@@ -96,13 +101,17 @@ public class UserController extends HttpServlet {
 			return mvmypage(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "/error/error.jsp";
+			return "/modify-member-info.jsp";
 		}
 	}
 
 	private String mvmypage(HttpServletRequest request, HttpServletResponse response) {
 
+<<<<<<< HEAD
 		return "/mypage.jsp";
+=======
+		return "/modify-member-info.jsp";
+>>>>>>> mypage
 	}
 
 	private String findID(HttpServletRequest request, HttpServletResponse response) {
@@ -206,11 +215,19 @@ public class UserController extends HttpServlet {
 		memberDto.setAnswer(request.getParameter("answer"));
 
 		try {
+<<<<<<< HEAD
 			if (memberService.join(memberDto) == 0) {
 				HttpSession session = request.getSession();
 				session.setAttribute("duplicateMsg", "아이디 중복!!");
 				return "/inner-page.jsp";
 			}
+=======
+//			if (memberService.join(memberDto) == 0) {
+//				HttpSession session = request.getSession();
+//				session.setAttribute("duplicateMsg", "아이디 중복!!");
+//				return "/inner-page.jsp";
+//			}
+>>>>>>> mypage
 			return "/user?action=mvlogin";
 		} catch (Exception e) {
 			e.printStackTrace();

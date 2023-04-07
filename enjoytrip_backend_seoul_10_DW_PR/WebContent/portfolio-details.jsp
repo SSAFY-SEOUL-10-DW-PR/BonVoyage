@@ -151,8 +151,8 @@
         <h1 class="modal-title fs-5" id="exampleModalLabel">New Review for ${title}</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+              <form method="post" action="${root}/review?action=write">
       <div class="modal-body">
-        <form method="post" action="${root}/review?action=write">
           <div class="mb-3">
         <input type="hidden" name="contentId" value="${tripDetail.contentid}">
         <input type="hidden" name="contentTypeId" value="${tripDetail.contenttypeid}">
@@ -160,12 +160,12 @@
             <label for="message-text" class="col-form-label">한줄 리뷰 남기기:</label>
             <textarea class="form-control" id="message-text" name="reviewContent"></textarea>
           </div>
-        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">저장하기</button>
       </div>
+              </form>
     </div>
   </div>
 </div>
