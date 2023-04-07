@@ -199,14 +199,7 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/login.js"></script>
     <script src="assets/js/detail-Info.js"></script>
-<<<<<<< HEAD
-    <script>
-console.log("${title}");
-console.log("${reviewers}");
-</script>
-=======
 
->>>>>>> review
   </body>
 </html>
     
