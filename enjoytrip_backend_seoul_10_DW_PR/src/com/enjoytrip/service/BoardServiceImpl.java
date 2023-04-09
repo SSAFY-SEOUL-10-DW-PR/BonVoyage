@@ -1,5 +1,6 @@
 package com.enjoytrip.service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,5 +94,20 @@ public class BoardServiceImpl implements BoardService {
 		// TODO : BoardDaoImpl의 deleteArticle 호출
 		boardDao.deleteArticle(articleNo);
 	}
+
+//	@Override
+//	public List<BoardDto> searchArticle(Map<String, String> map) throws SQLException {
+//		Map<String, Object> param = new HashMap<String, Object>();
+//		String key = map.get("key");
+////		if("userid".equals(key))
+////			key = "user_id";
+//		param.put("key", key.isEmpty() ? "" : key);
+//		param.put("word", map.get("word").isEmpty() ? "" : map.get("word"));
+//		int pgno = Integer.parseInt(map.get("pgno"));
+//		int start = pgno * SizeConstant.LIST_SIZE - SizeConstant.LIST_SIZE;
+//		param.put("start", start);
+//		param.put("listsize", SizeConstant.LIST_SIZE);
+//		return boardDao.searchArticle(param);
+//	}
 
 }

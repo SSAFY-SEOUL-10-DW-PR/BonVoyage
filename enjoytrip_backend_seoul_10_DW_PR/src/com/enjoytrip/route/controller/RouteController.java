@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import com.enjoytrip.attraction.model.AttractionDto;
 import com.enjoytrip.model.MemberDto;
+import com.enjoytrip.review.model.ReviewDto;
 import com.enjoytrip.route.model.RouteDto;
 import com.enjoytrip.route.model.service.RouteService;
 import com.enjoytrip.route.model.service.RouteServiceImpl;
@@ -52,38 +53,57 @@ public class RouteController extends HttpServlet {
 		} else if ("delete".equals(action)) {
 			path = delete(request, response);
 			redirect(request, response, path);
-		} else if ("modify".equals(action)) {
+		} else if ("mypage".equals(action)) {
+			path = mypage(request, response);
+			forward(request, response, path);
+		} 
+		else if ("modify".equals(action)) {
 			path = modify(request, response);
 			redirect(request, response, path);
 		} else {
 			redirect(request, response, path);
 		}
 	}
+	private String mypage(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+		if (memberDto != null) {
+			try {
+			List<RouteDto> routes=routeService.getRouteByUser(memberDto.getId());
+			System.out.println("여기");
+			request.setAttribute("routes", routes);
+			System.out.println("여긴가");
+				return "/mypage-route.jsp";
+			} catch (Exception e) {
+				e.printStackTrace();
+				request.setAttribute("msg", "문제 발생!!!");
+				return "/error/error.jsp";
+			}
+		} else
+			return "/inner-page.jsp";
+	}
+
 	private void loadLatesttRoute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
 		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
 		String userId = memberDto.getId();
-		if (memberDto != null) {
-			List<RouteDto> routes;
-			try {
-				routes = routeService.getRouteByUser(userId);
-			RouteDto latestroute = routes.get(routes.size() - 1);
-			
-			JSONArray routeJson = new JSONArray();
-			for (AttractionDto att  : latestroute.getRouteInfo()) {
-				System.out.println(att.toString());
-				JSONObject routeObject= new JSONObject(att);
-				System.out.println(routeObject.toString());
-				routeJson.put(routeObject);
-			}
-			response.setContentType("application/x-json; charset=utf-8");
-				response.getWriter().print(routeJson);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}else {
-			redirect(request,response,"/inner-page.jsp");
+		List<RouteDto> routes;
+		try {
+			routes = routeService.getRouteByUser(userId);
+		RouteDto latestroute = routes.get(routes.size() - 1);
+		
+		JSONArray routeJson = new JSONArray();
+		for (AttractionDto att  : latestroute.getRouteInfo()) {
+			System.out.println(att.toString());
+			JSONObject routeObject= new JSONObject(att);
+			System.out.println(routeObject.toString());
+			routeJson.put(routeObject);
+		}
+		response.setContentType("application/x-json; charset=utf-8");
+			response.getWriter().print(routeJson);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
     
@@ -151,7 +171,7 @@ public class RouteController extends HttpServlet {
 				return "/error/error.jsp";
 			}
 		} else
-			return "/user/login.jsp";
+			return "/inner-page.jsp";
 
 	}
 

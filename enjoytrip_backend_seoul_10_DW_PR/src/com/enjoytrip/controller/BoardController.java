@@ -71,11 +71,42 @@ public class BoardController extends HttpServlet {
 		} else if ("delete".equals(action)) {
 			path = delete(request, response);
 			redirect(request, response, path);
-		} else {
+		} 
+//		else if ("search".equals(action)) {
+//			path = search(request, response);
+//			redirect(request, response, path);
+//		} 
+		else {
 			redirect(request, response, path);
 		}
 	}
 	
+
+//	private String search(HttpServletRequest request, HttpServletResponse response) {
+//		HttpSession session = request.getSession();
+//		MemberDto memberDto = (MemberDto) session.getAttribute("userinfo");
+//		if (memberDto != null) {
+//			try {
+//				Map<String, String> map = new HashMap<String, String>();
+//				map.put("pgno", pgno + "");
+//				map.put("key", key);
+//				map.put("word", word);
+//				
+//				List<BoardDto> list = boardService.searchArticle(map);
+//				request.setAttribute("articles", list);
+//				
+//				PageNavigation pageNavigation = boardService.makePageNavigation(map);
+//				request.setAttribute("navigation", pageNavigation);
+//
+//				return "/community-list.jsp" + queryStrig;
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				request.setAttribute("msg", "글목록 출력 중 문제 발생!!!");
+//				return "/error/error.jsp";
+//			}
+//		} else
+//			return "/inner-page.jsp";
+//	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

@@ -210,4 +210,51 @@ public class BoardDaoImpl implements BoardDao {
 		}
 	}
 
+//	@Override
+//	public List<BoardDto> searchArticle(Map<String, Object> param) throws SQLException {
+//		List<BoardDto> list = new ArrayList<>();
+//		Connection conn = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		try {
+//			conn = dbUtil.getConnection();
+//			StringBuilder sql = new StringBuilder();
+//			sql.append("select article_no, user_id, title, content, hit, date \n");
+//			sql.append("from board \n");
+//			sql.append("where title like  \n");
+//			String key = (String) param.get("key");
+//			String word = (String) param.get("word");
+//			if(!key.isEmpty() && !word.isEmpty()) {
+//				if("title".equals(key)) {
+//					sql.append("where title like concat('%', ?, '%') \n");
+//				} else {
+//					sql.append("where ").append(key).append(" = ? \n");
+//				}
+//			}
+//			sql.append("order by article_no desc \n");
+//			sql.append("limit ?, ?");
+//			pstmt = conn.prepareStatement(sql.toString());
+//			int idx = 0;
+//			if(!key.isEmpty() && !word.isEmpty())
+//				pstmt.setString(++idx, word);
+//			pstmt.setInt(++idx, (Integer) param.get("start"));
+//			pstmt.setInt(++idx, (Integer) param.get("listsize"));
+//			rs = pstmt.executeQuery();
+//			while(rs.next()) {
+//				BoardDto boardDto = new BoardDto();
+//				boardDto.setArticleNo(rs.getInt("article_no"));
+//				boardDto.setUserId(rs.getString("user_id"));
+//				boardDto.setSubject(rs.getString("title"));
+//				boardDto.setContent(rs.getString("content"));
+//				boardDto.setHit(rs.getInt("hit"));
+//				boardDto.setRegisterTime(rs.getString("date"));
+//				
+//				list.add(boardDto);
+//			}
+//		} finally {
+//			dbUtil.close(rs, pstmt, conn);
+//		}
+//		return list;
+//	}
+
 }

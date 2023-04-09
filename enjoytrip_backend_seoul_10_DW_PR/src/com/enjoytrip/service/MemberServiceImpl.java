@@ -26,8 +26,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void join(MemberDto memberDto) throws Exception {
-		memberDao.join(memberDto);
+	public int join(MemberDto memberDto) throws Exception {
+		return memberDao.join(memberDto);
 	}
 	
 	// 비밀번호 찾기 인증 코드 보내기
@@ -69,5 +69,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void delete(MemberDto memberDto) throws SQLException {
 		memberDao.delete(memberDto);
+	}
+
+	@Override
+	public MemberDto findMemberInfo(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		return memberDao.getUserInfo(userId);
 	}
 }

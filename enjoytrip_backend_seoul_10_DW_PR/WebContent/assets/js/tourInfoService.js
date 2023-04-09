@@ -69,7 +69,7 @@ document.getElementById("btn-search-keyword").addEventListener("click", function
   let search = document.getElementById("search-keyword").value;
   let areaCode = document.getElementById("dropdownMenuOffset").value;
   let sigunguCode = document.getElementById("dropdownMenu").value;
-  let searchUrl = `https://apis.data.go.kr/B551011/KorService1/searchKeyword1?serviceKey=${serviceKey}&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A`;
+  let searchUrl = `https://apis.data.go.kr/B551011/KorService1/searchKeyword1?serviceKey=${serviceKey}&numOfRows=20&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json&listYN=Y&arrange=A`;
   if (areaCode != "0") {
     searchUrl += `&areaCode=${areaCode}`;
   }

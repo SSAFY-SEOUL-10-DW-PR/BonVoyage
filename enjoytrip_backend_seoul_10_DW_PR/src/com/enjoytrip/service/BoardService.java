@@ -1,5 +1,6 @@
 package com.enjoytrip.service;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -16,5 +17,6 @@ public interface BoardService {
 	
 	void modifyArticle(BoardDto boardDto) throws Exception;
 	void deleteArticle(int articleNo) throws Exception;
+//	List<BoardDto> searchArticle(Map<String, String> map) throws SQLException;
 	
 }

@@ -28,7 +28,7 @@
                 <div class="title">
                   <dl>
                     <dt>제목</dt>
-                    <dd><input type="text" id="subject" name="subject" placeholder="제목 입력" /></dd>
+                    <dd><input type="text" id="subject" name="subject" placeholder="제목 입력"/></dd>
                   </dl>
                 </div>
                 <div class="info">

@@ -2,6 +2,8 @@ let title = "";
 let info = "";
 let img = "";
 let desc = "";
+let tripDetail=null,tripImg=null;
+let rootLoc="";
 async function viewDetail(select) {
   var str = select.id.split(",");
   var contentId = str[0];
@@ -33,7 +35,8 @@ async function viewDetail(select) {
 
 function infoList(data) {
   var trips = data.response.body.items.item;
-  var site = "";
+  tripDetail=trips;
+/*  var site = "";
   var infolist = `<h3>${title}</h3>
   <ul>`;
   trips.forEach((area) => {
@@ -64,12 +67,13 @@ function infoList(data) {
   });
 
   info = infolist;
-  localStorage.setItem("info", info);
+  localStorage.setItem("info", info);*/
 }
 
 function imgList(data) {
   var trips = data.response.body.items.item;
-  var site = "";
+  tripImg=trips;
+/*  var site = "";
   var imglist = ``;
   trips.forEach((area) => {
     if (area.originimgurl != "")
@@ -78,7 +82,7 @@ function imgList(data) {
   </div>`;
   });
   img = imglist;
-  localStorage.setItem("img", img);
+  localStorage.setItem("img", img);*/
 }
 
 function descList(data) {
@@ -88,6 +92,43 @@ function descList(data) {
     desc = area.overview;
   });
 
-  localStorage.setItem("desc", desc);
-  window.location.href = "./portfolio-details.jsp";
+/*  localStorage.setItem("desc", desc);*/
+/*  window.location.href = "./portfolio-details.jsp";*/
+//  window.open("/enjoytrip_backend_seoul_10_DW_PR/detail?action=save");
+
+
+   var form = document.createElement('form');
+    form.setAttribute('method', 'post'); //POST 메서드 적용
+    form.setAttribute('action', "/enjoytrip_backend_seoul_10_DW_PR/attraction?action=detail");	// 데이터를 전송할 url
+    document.charset = "utf-8";
+    var hiddenField = document.createElement('input');
+    hiddenField.setAttribute('type', 'hidden'); //값 입력
+    hiddenField.setAttribute('name', "tripDetail");
+    hiddenField.setAttribute('value', JSON.stringify(tripDetail));
+    form.appendChild(hiddenField);
+    var hiddenField1 = document.createElement('input');
+    hiddenField1.setAttribute('type', 'hidden'); //값 입력
+    hiddenField1.setAttribute('name', "tripImg");
+    hiddenField1.setAttribute('value', JSON.stringify(tripImg));
+    form.appendChild(hiddenField1);
+
+    var hiddenField2 = document.createElement('input');
+    hiddenField2.setAttribute('type', 'hidden'); //값 입력
+    hiddenField2.setAttribute('name', "desc");
+    hiddenField2.setAttribute('value', desc);
+    form.appendChild(hiddenField2);
+
+    var hiddenField3 = document.createElement('input');
+    hiddenField3.setAttribute('type', 'hidden'); //값 입력
+    hiddenField3.setAttribute('name', "title");
+    hiddenField3.setAttribute('value', title);
+    form.appendChild(hiddenField3);
+    
+    document.body.appendChild(form);
+    console.log(tripImg);
+console.log(desc);
+console.log(typeof(desc));
+console.log(tripDetail);
+    form.target="_blank";
+    form.submit();	// 전송~
 }

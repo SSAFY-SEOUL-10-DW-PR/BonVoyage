@@ -37,14 +37,15 @@ public class ReviewDaoImpl implements ReviewDao {
 		try {
 			conn = dbUtil.getConnection();
 			StringBuilder sql = new StringBuilder();
-			sql.append("insert into review (user_id, content_id, content_type_id, review_content) \n");
-			sql.append("values (?, ?, ?, ?) on duplicate key update review_content=?");
+			sql.append("insert into review (user_id, content_id, content_type_id, review_content,location) \n");
+			sql.append("values (?, ?, ?, ?,?) on duplicate key update review_content=?");
 			pstmt = conn.prepareStatement(sql.toString());
 			pstmt.setString(1, reviewDto.getUserId());
 			pstmt.setInt(2, reviewDto.getContentId());
 			pstmt.setInt(3, reviewDto.getContentTypeId());
-			pstmt.setString(3, reviewDto.getReviewContent());
 			pstmt.setString(4, reviewDto.getReviewContent());
+			pstmt.setString(5, reviewDto.getLocation());
+			pstmt.setString(6, reviewDto.getReviewContent());
 			cnt=pstmt.executeUpdate();
 		} finally {
 			dbUtil.close(pstmt, conn);
@@ -81,7 +82,7 @@ public class ReviewDaoImpl implements ReviewDao {
 		try {
 			conn=dbUtil.getConnection();
 			StringBuilder sql= new StringBuilder();
-			sql.append("select user_id, content_id, content_type_id, review_content from review where review_id=?");
+			sql.append("select review_id, user_id, content_id, content_type_id, review_content, location from review where review_id=?");
 			pstmt=conn.prepareStatement(sql.toString());
 			pstmt.setInt(1, reviewId);
 			rs=pstmt.executeQuery();
@@ -109,7 +110,7 @@ public class ReviewDaoImpl implements ReviewDao {
 				try {
 					conn=dbUtil.getConnection();
 					StringBuilder sql= new StringBuilder();
-					sql.append("select user_id, content_id, content_type_id, review_content from review where content_id=?");
+					sql.append("select review_id, user_id, content_id, content_type_id, review_content, location from review where content_id=?");
 					pstmt=conn.prepareStatement(sql.toString());
 					pstmt.setInt(1, attractionId);
 					rs=pstmt.executeQuery();
@@ -138,7 +139,7 @@ public class ReviewDaoImpl implements ReviewDao {
 		try {
 			conn=dbUtil.getConnection();
 			StringBuilder sql= new StringBuilder();
-			sql.append("select user_id, content_id, content_type_id, review_content from review where user_id=?");
+			sql.append("select review_id, user_id, content_id, content_type_id, review_content, location, write_date from review where user_id=?");
 			pstmt=conn.prepareStatement(sql.toString());
 			pstmt.setString(1, userId);
 			rs=pstmt.executeQuery();
@@ -149,6 +150,8 @@ public class ReviewDaoImpl implements ReviewDao {
 				reviewDto.setContentId(rs.getInt("content_id"));
 				reviewDto.setContentTypeId(rs.getInt("content_type_id"));
 				reviewDto.setReviewContent(rs.getString("review_content"));
+				reviewDto.setWriteDate(rs.getString("write_date"));
+				reviewDto.setLocation(rs.getString("location"));
 				reviewList.add(reviewDto);
 			}
 		} finally {
