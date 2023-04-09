@@ -1,92 +1,385 @@
-# Enjoytrip_Backend_서울_10_김동욱_김푸름
+# 서울 10반 EnjoyTrip 관통 프로젝트
+
+<p align="center">
+  <br>
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3gLsznyvXmyYnfvz44cJJOt1vtoFwuNfgYeZIapie_g&s">
+  <br>
+</p>
 
 
+##  📑 프로젝트 개요
 
-## Getting started
+### - 프로젝트 소개
+<aside>
+💡 지역 경기 침체에 도움을 주고자 지역 관광 활성화를 위한 지역 관광 소개 페이지
+</aside>
+       
+      
+    
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## 🛠 구현 기능
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+- 필수  
+#1. 지역별 / 유형별 여행지 검색  
+#2. 게시판 기능    
+#3. 로그인 및 회원 관리 기능(마이페이지)
 
-## Add your files
+- 추가 및 심화  
+#1. 여행 경로 설정 및 변경   
+#2. 경로 저장 및 최근 경로 불러오기   
+#3. 상세 정보 제공   
+#4. 여행지 별 리뷰 제공
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+<hr/>
 
-```
-cd existing_repo
-git remote add origin https://lab.ssafy.com/prkim99/enjoytrip_backend_seoul_10_DW_PR.git
-git branch -M master
-git push -uf origin master
-```
+## 📌활용
 
-## Integrate with your tools
+| HTML  |  CSS  |  JS   | AJAX  |  JSP  | Java  |  MVC  |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+<br>
 
-- [ ] [Set up project integrations](https://lab.ssafy.com/prkim99/enjoytrip_backend_seoul_10_DW_PR/-/settings/integrations)
+---
+## :page_with_curl: DB 설계
 
-## Collaborate with your team
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/Copy%20of%20EnjoyTrip.png "DB")
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+## :pencil2: 요구 사항
 
-## Test and Deploy
+> ###  F01) 지역별 관광지 정보 수집
+>
+> ### 이미지 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/F01.png "지역별 관광지 정보 보기")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 한국관광공사 : 지역별 관광지
+정보를 얻어와 화면에 표시
 
-Use the built-in continuous integration in GitLab.
+<hr/>
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+> ### F02) 관광지, 숙박, 음식점 조회
+>
+> ### 이미지 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/F02.png "관광지, 숙박, 음식점 조회")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 관광지 정보를 지역별 원하는
+컨텐츠 별 조회.
 
-***
+<hr/>
+  
+> ### F03) 문화시설, 공연, 여행코스, 쇼핑 조회
+>
+> ### 이미지 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/F03.png "문화시설, 공연, 여행코스, 쇼핑 조회")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 관광지 정보를 지역별 원하는
+컨텐츠 별 조회.
 
-# Editing this README
+<hr/>
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+> ### F04) 여행 계획 경로 설정
+>
+> ### 이미지 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/F04.png "여행 계획 경로 설정")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 조회한 관광지를 활용하여 여행
+계획, 여행 경로를 저장
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+<hr/>
 
-## Name
-Choose a self-explaining name for your project.
+> ### F05) 경로 순서 변경
+>
+> ### 이미지 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/F05.png "경로 순서 변경")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 경로 변경 시 수정한 경로대로 화면에 표시
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+<hr/>
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+> ### F06) 상세 정보
+>
+> ### 이미지 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/F06.png "상세 정보")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 관광지 정보를 크롤링하여 상세 정보 제공
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+<hr/>
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+> ### F07) 회원 관리
+>
+> ### 이미지 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/F07.png "회원 관리")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 회원가입, 수정, 조회, 탈퇴
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+<hr/>
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+> ### F08) 로그인 관리
+>
+> ### 이미지 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/F08.png "로그인 관리")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 로그인 / 로그아웃 / 비밀번호
+찾기
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+<hr/>
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+> ### F09) 공지사항
+>
+> ### 이미지 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/F09.png "공지사항")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 공지사항 등록, 수정, 삭제, 조회
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+<hr/>
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+> ### F10) 지도 내 위치 클릭 시 이동
+>
+> ### 이미지 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/F10.png "지도 내 위치 클릭 시 이동")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 지도 내 위치 클릭 시 화면 중앙으로 이동
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+<hr/>
 
-## License
-For open source projects, say how it is licensed.
+> ### F11) 비밀번호 찾기 기능
+>
+> ### 이미지 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/F11-1.png "비밀번호 찾기")
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/F11-2.png "비밀번호 찾기")
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/F11-3.png "비밀번호 찾기")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 회원가입 시 입력한 비밀번호 질문 및 답변 통해 새 비밀번호 설정 가능
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+<hr/>
+
+> ### F12) 회원 정보 수정 및 탈퇴
+>
+> ### 이미지 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/F12.png "비밀번호 찾기")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 마이페이지에서 회원정보 수정 페이지에서 정보 수정 및 회원 탈퇴 기능(사용자 정보 창 조회 시 기존 정보 자동으로 불러옴)
+
+<hr/>
+
+> ### F13) 리뷰 작성 및 조회
+>
+> ### 이미지 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/F13-1.png "리뷰 작성 및 조회")
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/F13-2.png "리뷰 작성 및 조회")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 상세 정보 창 내 리뷰 작성 및 작성한 리뷰 조회 가능
+
+<hr/>
+
+> ### F14) 저장한 최근 경로 불러오기
+>
+> ### 이미지 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/F14.png "최근 저장한 경로 불러오기")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 최근 저장한 경로 불러오기 버튼을 통해 경로 불러오기 가능
+
+<hr/>
+
+> ### F15) 저장한 경로 조회
+>
+> ### 이미지 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/F15.png "저장한 경로들 조회")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 경로저장 버튼 통해 저장한 경로들 마이페이지 내 저장한 경로 창에서 조회 가능
+
+<hr/>
+
+- ### 화면 설계 예시
+  > - 메인 화면
+  >   ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/%EB%A9%94%EC%9D%B8%20%ED%99%94%EB%A9%B4.png "메인 화면")
+
+<hr/>
+
+## :pencil2: 추가 기능 #1 경로 설정
+
+> ### 화면 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/additional01.gif "경로 설정")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 장소 검색 후 일정에 추가하여 경로 설정
+<hr/>
+
+## :pencil2: 추가 기능 #2 경로 순서 변경
+
+> ### 화면 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/additional02.gif "경로 순서 변경")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 추가된 경로들의 순서 변경
+
+<hr/>
+
+## :pencil2: 추가 기능 #3 경로 저장 및 경로 불러오기
+
+> ### 화면 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/additional03.gif "경로 저장 및 불러오기")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 저장된 경로 불러오기
+
+<hr/>
+
+## :pencil2: 심화 기능 #1 상세 정보
+
+> ### 화면 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/advanced01.gif "상세 정보 보기")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 원하는 장소의 상세 정보 클릭 시 이용 시간 등의 상세 정보 제공
+
+<hr/>
+
+## :pencil2: 심화 기능 #2 리뷰
+
+> ### 화면 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/advanced02.gif "리뷰 보기")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 상세 정보 창에서 리뷰 작성 및 리뷰 정보 공유 기능
+
+<hr/>
+
+## :pencil2: 심화 기능 #3 공지사항
+
+> ### 화면 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/advanced03.gif "공지사항")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 게시글 및 글 등록, 수정, 조회가 가능한 공지사항 게시판
+
+<hr/>
+
+## :pencil2: 심화 기능 #4 지도 내 위치 클릭 시 이동
+
+> ### 화면 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/advanced04.gif "지도 내 위치 클릭 시 이동")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 장소 검색 시 화면 중앙에 지정한 장소가 위치하도록 설정
+
+<hr/>
+
+## :pencil2: 심화 기능 #5 마이페이지
+
+> ### 화면 예시
+>
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/advanced05.gif "마이페이지")
+>
+> <hr/>
+>
+> ### Description
+>
+> - 회원 정보 조회 및 수정, 저장한 경로 및 작성한 리뷰 조회
+
+<hr/>
+
+## :sparkles: 최종 결과물 화면 예시
+
+> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/finalResult.gif "최종 결과물")

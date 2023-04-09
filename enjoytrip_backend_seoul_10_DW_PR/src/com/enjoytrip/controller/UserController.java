@@ -210,6 +210,7 @@ public class UserController extends HttpServlet {
 			memberService.join(memberDto);
 			return "/user?action=mvlogin";
 		} catch (Exception e) {
+
 			e.printStackTrace();
 			return "/error/error.jsp";
 		}
