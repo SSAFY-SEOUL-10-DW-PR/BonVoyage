@@ -38,6 +38,9 @@
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 <br>
 
+### git flow graph
+> ![Alt text](/source/git_flow.png "git flow")
+
 ---
 ## :page_with_curl: DB 설계
 
