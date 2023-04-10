@@ -44,7 +44,7 @@
 ---
 ## :page_with_curl: DB 설계
 
-> ![Alt text](/enjoytrip_backend_seoul_10_DW_PR/WebContent/assets/screenshots/Copy%20of%20EnjoyTrip.png "DB")
+> ![Alt text](/source/Copy%20of%20EnjoyTrip.png "DB")
 
 ## :pencil2: 요구 사항
 
